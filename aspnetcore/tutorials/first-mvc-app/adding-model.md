@@ -15,6 +15,8 @@ uid: tutorials/first-mvc-app/adding-model
 
 [!INCLUDE[adding-model](../../includes/mvc-intro/adding-model1.md)]
 
+Note: The ASP.NET Core 2.0 templates contain the *Models* folder.
+
 In Solution Explorer, right click the **MvcMovie** project > **Add** > **New Folder**. Name the folder *Models*.
 
 Right click the *Models* folder > **Add** > **Class**. Name the class **Movie** and add the following properties:
@@ -64,15 +66,17 @@ Visual Studio creates:
 * A movies controller (*Controllers/MoviesController.cs*)
 * Razor view files for Create, Delete, Details, Edit and Index pages (*Views/Movies/&ast;.cshtml*)
 
-The automatic creation of the database context and [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*. You'll soon have a fully functional web application that lets you manage a movie database.
+The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*. You'll soon have a fully functional web application that lets you manage a movie database.
 
 If you run the app and click on the **Mvc Movie** link, you'll get an error similar to the following:
 
 ```
 An unhandled exception occurred while processing the request.
-SqlException: Cannot open database "MvcMovieContext-<GUID removed>" 
-requested by the login. The login failed.
-Login failed for user Rick
+
+SqlException: Cannot open database "MvcMovieContext-<GUID removed>" requested by the login. The login failed.
+Login failed for user 'Rick'.
+
+System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString 
 ```
 
 You need to create the database, and you'll use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to do that. Migrations lets you create a database that matches your data model and update the database schema when your data model changes.
@@ -87,6 +91,7 @@ In this section you'll use the Package Manager Console (PMC) to:
 
 From the **Tools** menu, select **NuGet Package Manager > Package Manager Console**.
 
+<!-- following image shared with uid: tutorials/razor-pages/model -->
   ![PMC menu](adding-model/_static/pmc.png)
 
 In the PMC, enter the following commands:
@@ -97,9 +102,23 @@ Add-Migration Initial
 Update-Database
 ```
 
-The `Add-Migration` command creates code to create the initial database schema. The schema is based on the model specified in the `DbContext`(In the *Data/MvcMovieContext.cs file). The `Initial` argument is used to name the migrations. You can use any name, but by convention you choose a name that describes the migration. See [Introduction to migrations](xref:data/ef-mvc/migrations#introduction-to-migrations) for more information.
+**Note:** If you receive an error with the `Install-Package` command, open NuGet Package Manager and search for the `Microsoft.EntityFrameworkCore.Tools` package. This allows you to install the package or check if it is already installed. Alternatively, see the [CLI approach](#cli) if you have problems with the PMC.
+
+The `Add-Migration` command creates code to create the initial database schema. The schema is based on the model specified in the `DbContext`(In the *Data/MvcMovieContext.cs* file). The `Initial` argument is used to name the migrations. You can use any name, but by convention you choose a name that describes the migration. See [Introduction to migrations](xref:data/ef-mvc/migrations#introduction-to-migrations) for more information.
 
 The `Update-Database` command runs the `Up` method in the *Migrations/\<time-stamp>_InitialCreate.cs* file, which creates the database.
+
+<a name="cli"></a>
+You can perform the preceeding steps using the command-line interface (CLI) rather than the PMC:
+
+* Add [EF Core tooling](xref:data/ef-mvc/migrations#entity-framework-core-nuget-packages-for-migrations) to the *.csproj* file.
+* Run the following commands from the console (in the project directory):
+
+  ```console
+  dotnet ef migrations add InitialCreate
+  dotnet ef database update
+  ```     
+  
 
 [!INCLUDE[adding-model](../../includes/mvc-intro/adding-model3.md)]
 

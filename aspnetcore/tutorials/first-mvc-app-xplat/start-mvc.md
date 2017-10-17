@@ -2,7 +2,7 @@
 title: Introduction to ASP.NET Core MVC on Mac, Linux, or Windows
 author: rick-anderson
 description: Getting started with ASP.NET Core MVC and Visual Studio Code on Mac, Linux, and Windows
-keywords: ASP.NET Core, MVC, VS Code, Visual Studio Code, Mac, Linux, Windows
+keywords: ASP.NET Core,MVC,VS Code,Visual Studio Code,Mac,Linux,Windows
 ms.author: riande
 manager: wpickett
 ms.date: 07/07/2017
@@ -16,7 +16,7 @@ uid: tutorials/first-mvc-app-xplat/start-mvc
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-This tutorial will teach you the basics of building an ASP.NET Core MVC web app using [Visual Studio Code](https://code.visualstudio.com) (VS Code). The tutorial assumes familarity with VS Code. See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information. 
+This tutorial will teach you the basics of building an ASP.NET Core MVC web app using [Visual Studio Code](https://code.visualstudio.com) (VS Code). The tutorial assumes familarity with VS Code. See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information. [!INCLUDE[consider RP](../../includes/razor.md)]
 
 There are 3 versions of this tutorial:
 
@@ -26,10 +26,13 @@ There are 3 versions of this tutorial:
 
 ## Install VS Code and .NET Core
 
-Download and install:
-- [.NET Core](https://microsoft.com/net/core)
-- [VS Code](https://code.visualstudio.com)
-- VS Code [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+This tutorial requires the [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) or later. See [the pdf](https://github.com/aspnet/Docs/blob/master/aspnetcore/tutorials/first-mvc-app-mac/start-mvc/8-23-17.pdf) for the ASP.NET Core 1.1 version.
+
+Install the following:
+
+* [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) or later.
+* [Visual Studio Code](https://code.visualstudio.com)
+* VS Code [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) 
 
 ## Create a web app with dotnet
 
@@ -67,9 +70,9 @@ In the next part of this tutorial, we'll learn about MVC and start writing some 
 - [Integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
 - [Keyboard shortcuts](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference)
 
-  - [Mac keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832143)
-  - [Linux keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832144)
-  - [Windows keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832145)
+  - [Mac keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+  - [Linux keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf)
+  - [Windows keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
 >[!div class="step-by-step"]
 [Next - Add a controller](adding-controller.md)

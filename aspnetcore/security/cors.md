@@ -18,7 +18,7 @@ By [Mike Wasson](https://github.com/mikewasson), [Shayne Boyer](https://twitter.
 
 Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the *same-origin policy*, and prevents a malicious site from reading sensitive data from another site. However, sometimes you might want to let other sites make cross-origin requests to your web API.
 
-[Cross Origin Resource Sharing](http://www.w3.org/TR/cors/) (CORS) is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others. CORS is safer and more flexible than earlier techniques such as [JSONP](http://en.wikipedia.org/wiki/JSONP). This topic shows how to enable CORS in an ASP.NET Core application.
+[Cross Origin Resource Sharing](http://www.w3.org/TR/cors/) (CORS) is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others. CORS is safer and more flexible than earlier techniques such as [JSONP](https://wikipedia.org/wiki/JSONP). This topic shows how to enable CORS in an ASP.NET Core application.
 
 ## What is "same origin"?
 
@@ -58,6 +58,8 @@ To enable CORS for your entire application add the CORS middleware to your reque
 You can specify a cross-origin policy when adding the CORS middleware using the `CorsPolicyBuilder` class. There are two ways to do this. The first is to call UseCors with a lambda:
 
 [!code-csharp[Main](cors/sample/CorsExample1/Startup.cs?highlight=11,12&range=22-38)]
+
+**Note:** The URL must be specified without a trailing slash (`/`). If the URL terminates with `/`, the comparison will return `false` and no header will be returned.
 
 The lambda takes a `CorsPolicyBuilder` object. You'll find a list of the [configuration options](#cors-policy-options) later in this topic. In this example, the policy allows cross-origin requests from `http://example.com` and no other origins.
 
@@ -212,11 +214,11 @@ The Access-Control-Max-Age header specifies how long the response to the preflig
 
 [!code-csharp[Main](cors/sample/CorsExample4/Startup.cs?range=89-94)]
 
-<a name=cors-how-cors-works></a>
+<a name="cors-how-cors-works"></a>
 
 ## How CORS works
 
-This section describes what happens in a CORS request, at the level of the HTTP messages. It’s important to understand how CORS works, so that you can configure the your CORS policy correctly, and troubleshoot if things don’t work as you expect.
+This section describes what happens in a CORS request, at the level of the HTTP messages. It’s important to understand how CORS works, so that you can configure your CORS policy correctly, and troubleshoot if things don’t work as you expect.
 
 The CORS specification introduces several new HTTP headers that enable cross-origin requests. If a browser supports CORS, it sets these headers automatically for cross-origin requests; you don’t need to do anything special in your JavaScript code.
 

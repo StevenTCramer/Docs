@@ -2,7 +2,7 @@
 title: ASP.NET Core MVC with EF Core - Data Model - 5 of 10
 author: tdykstra
 description: In this tutorial you add more entities and relationships and customize the data model by specifying formatting, validation, and database mapping rules.
-keywords: ASP.NET Core, Entity Framework Core, data annotations
+keywords: ASP.NET Core,Entity Framework Core,data annotations
 ms.author: tdykstra
 manager: wpickett
 ms.date: 03/15/2017
@@ -17,9 +17,9 @@ uid: data/ef-mvc/complex-data-model
 
 By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-The Contoso University sample web application demonstrates how to create ASP.NET Core 1.1 MVC web applications using Entity Framework Core 1.1 and Visual Studio 2017. For information about the tutorial series, see [the first tutorial in the series](intro.md).
+The Contoso University sample web application demonstrates how to create ASP.NET Core MVC web applications using Entity Framework Core and Visual Studio. For information about the tutorial series, see [the first tutorial in the series](intro.md).
 
-In the previous tutorials you worked with a simple data model that was composed of three entities. In this tutorial you'll add more entities and relationships and you'll customize the data model by specifying formatting, validation, and database mapping rules.
+In the previous tutorials, you worked with a simple data model that was composed of three entities. In this tutorial, you'll add more entities and relationships and you'll customize the data model by specifying formatting, validation, and database mapping rules.
 
 When you're finished, the entity classes will make up the completed data model that's shown in the following illustration:
 
@@ -57,7 +57,7 @@ You can use the `DisplayFormat` attribute by itself, but it's generally a good i
 
 For more information, see the [\<input> tag helper documentation](../../mvc/views/working-with-forms.md#the-input-tag-helper).
 
-Run the Students Index page again and notice that times are no longer displayed for the enrollment dates. The same will be true for any view that uses the Student model.
+Run the app, go to the Students Index page and notice that times are no longer displayed for the enrollment dates. The same will be true for any view that uses the Student model.
 
 ![Students index page showing dates without times](complex-data-model/_static/dates-no-times.png)
 
@@ -69,7 +69,7 @@ Suppose you want to ensure that users don't enter more than 50 characters for a 
 
 [!code-csharp[Main](intro/samples/cu/Models/Student.cs?name=snippet_StringLength&highlight=10,12)]
 
-The `StringLength` attribute won't prevent a user from entering white space for a name. You can use the `RegularExpression` attribute to apply restrictions to the input. For example the following code requires the first character to be upper case and the remaining characters to be alphabetical:
+The `StringLength` attribute won't prevent a user from entering white space for a name. You can use the `RegularExpression` attribute to apply restrictions to the input. For example, the following code requires the first character to be upper case and the remaining characters to be alphabetical:
 
 ```csharp
 [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
@@ -83,14 +83,17 @@ Save your changes and build the project. Then open the command window in the pro
 
 ```console
 dotnet ef migrations add MaxLengthOnNames
+```
+
+```console
 dotnet ef database update
 ```
 
-The `migrations add` command warns that data loss may occur, because the change makes the maximum length shorter for two columns.  Migrations creates a file named *<timeStamp>_MaxLengthOnNames.cs*. This file contains code in the `Up` method that will update the database to match the current data model. The `database update` command ran that code.
+The `migrations add` command warns that data loss may occur, because the change makes the maximum length shorter for two columns.  Migrations creates a file named *\<timeStamp>_MaxLengthOnNames.cs*. This file contains code in the `Up` method that will update the database to match the current data model. The `database update` command ran that code.
 
 The timestamp prefixed to the migrations file name is used by Entity Framework to order the migrations. You can create multiple migrations before running the update-database command, and then all of the migrations are applied in the order in which they were created.
 
-Run the Create page, and enter either name longer than 50 characters. When you click Create, client side validation shows an error message.
+Run the app, select the **Students** tab, click **Create New**, and enter either name longer than 50 characters. When you click **Create**, client side validation shows an error message.
 
 ![Students index page showing string length errors](complex-data-model/_static/string-length-errors.png)
 
@@ -110,6 +113,9 @@ Save your changes and build the project. Then open the command window in the pro
 
 ```console
 dotnet ef migrations add ColumnFirstName
+```
+
+```console
 dotnet ef database update
 ```
 
@@ -205,7 +211,7 @@ public int InstructorID { get; set; }
 
 You can also use the `Key` attribute if the entity does have its own primary key but you want to name the property something other than classnameID or ID.
 
-By default EF treats the key as non-database-generated because the column is for an identifying relationship.
+By default, EF treats the key as non-database-generated because the column is for an identifying relationship.
 
 ### The Instructor navigation property
 
@@ -235,7 +241,7 @@ The `DatabaseGenerated` attribute with the `None` parameter on the `CourseID` pr
 public int CourseID { get; set; }
 ```
 
-By default, the Entity Framework assumes that primary key values are generated by the database. That's what you want in most scenarios. However, for Course entities, you'll use a user-specified course number such as a 1000 series for one department, a 2000 series for another department, and so on.
+By default, Entity Framework assumes that primary key values are generated by the database. That's what you want in most scenarios. However, for Course entities, you'll use a user-specified course number such as a 1000 series for one department, a 2000 series for another department, and so on.
 
 The `DatabaseGenerated` attribute can also be used to generate default values, as in the case of database columns used to record the date a row was created or updated.  For more information, see [Generated Properties](https://docs.microsoft.com/ef/core/modeling/generated-properties).
 
@@ -256,7 +262,7 @@ A course can have any number of students enrolled in it, so the `Enrollments` na
 public ICollection<Enrollment> Enrollments { get; set; }
 ```
 
-A course may be taught by multiple instructors, so the `CourseAssignments` navigation property is a collection (the type `CourseAssignment` is explained [later](#many-to-many-relationships):
+A course may be taught by multiple instructors, so the `CourseAssignments` navigation property is a collection (the type `CourseAssignment` is explained [later](#many-to-many-relationships)):
 
 ```csharp
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
@@ -364,7 +370,7 @@ A join table is required in the database for the Instructor-to-Courses many-to-m
 
 Since the foreign keys are not nullable and together uniquely identify each row of the table, there is no need for a separate primary key. The *InstructorID* and *CourseID* properties should function as a composite primary key. The only way to identify composite primary keys to EF is by using the *fluent API* (it can't be done by using attributes). You'll see how to configure the composite primary key in the next section.
 
-The composite key ensures that while you can have multiple rows for one course, and multiple rows for one instructor, you can't have multiple rows for the same instructor and course. The `Enrollment` join entity defines its own primary key, so duplicates of this sort are possible. To prevent such duplicates, you could add a unique index on the foreign key fields, or configure `Enrollment` with a primary composite key similar to `CourseAssignment`. For more information, see [Indexes](https://docs.efproject.net/en/latest/modeling/indexes.html).
+The composite key ensures that while you can have multiple rows for one course, and multiple rows for one instructor, you can't have multiple rows for the same instructor and course. The `Enrollment` join entity defines its own primary key, so duplicates of this sort are possible. To prevent such duplicates, you could add a unique index on the foreign key fields, or configure `Enrollment` with a primary composite key similar to `CourseAssignment`. For more information, see [Indexes](https://docs.microsoft.com/ef/core/modeling/indexes).
 
 ## Update the database context
 
@@ -387,7 +393,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-In this tutorial you're using the fluent API only for database mapping that you can't do with attributes. However, you can also use the fluent API to specify most of the formatting, validation, and mapping rules that you can do by using attributes. Some attributes such as `MinimumLength` can't be applied with the fluent API. As mentioned previously, `MinimumLength` doesn't change the schema, it only applies a client and server side validation rule.
+In this tutorial, you're using the fluent API only for database mapping that you can't do with attributes. However, you can also use the fluent API to specify most of the formatting, validation, and mapping rules that you can do by using attributes. Some attributes such as `MinimumLength` can't be applied with the fluent API. As mentioned previously, `MinimumLength` doesn't change the schema, it only applies a client and server side validation rule.
 
 Some developers prefer to use the fluent API exclusively so that they can keep their entity classes "clean." You can mix attributes and fluent API if you want, and there are a few customizations that can only be done by using fluent API, but in general the recommended practice is to choose one of these two approaches and use that consistently as much as possible. If you do use both, note that wherever there is a conflict, Fluent API overrides attributes.
 
@@ -420,11 +426,6 @@ dotnet ef migrations add ComplexDataModel
 You get a warning about possible data loss.
 
 ```text
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:11.58
 An operation was scaffolded that may result in the loss of data. Please review the migration for accuracy.
 Done. To undo this action, use 'ef migrations remove'
 ```
@@ -478,11 +479,11 @@ dotnet ef database update
 
 Run the app to cause the `DbInitializer.Initialize` method to run and populate the new database.
 
-Open the database in SSOX as you did earlier, and expand the **Tables** node to see that all of the tables have been created. (If you still have SSOX open from the earlier time, click the Refresh button.)
+Open the database in SSOX as you did earlier, and expand the **Tables** node to see that all of the tables have been created. (If you still have SSOX open from the earlier time, click the **Refresh** button.)
 
 ![Tables in SSOX](complex-data-model/_static/ssox-tables.png)
 
-Run the application to trigger the initializer code that seeds the database.
+Run the app to trigger the initializer code that seeds the database.
 
 Right-click the **CourseAssignment** table and select **View Data** to verify that it has data in it.
 

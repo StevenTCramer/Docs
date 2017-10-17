@@ -1,24 +1,24 @@
 ---
-title: Integration testing
+title: Integration testing in ASP.NET Core
 author: ardalis
 description: How to use ASP.NET Core integration testing to ensure that an application's components function correctly.
-keywords: ASP.NET Core, integration testing
+keywords: ASP.NET Core,integration testing,Razor
 ms.author: riande
 manager: wpickett
-ms.date: 02/14/2017
+ms.date: 09/25/2017
 ms.topic: article
 ms.assetid: 40d534f2-89b3-4b09-9c2c-3494bf9991c9
 ms.technology: aspnet
 ms.prod: asp.net-core
 uid: testing/integration-testing
 ---
-# Integration testing
+# Integration testing in ASP.NET Core
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 Integration testing ensures that an application's components function correctly when assembled together. ASP.NET Core supports integration testing using unit test frameworks and a built-in test web host that can be used to handle requests without network overhead.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/testing/integration-testing/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/testing/integration-testing/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## Introduction to integration testing
 
@@ -59,6 +59,23 @@ Note that you're not really trying to test the correctness of the prime number c
 ![Test Explorer](integration-testing/_static/test-explorer.png)
 
 You can learn more about the unit tests in the [Unit testing](https://docs.microsoft.com/dotnet/articles/core/testing/unit-testing-with-dotnet-test) article.
+
+
+### Integration testing Mvc/Razor
+
+Test projects that contain Razor views require `<PreserveCompilationContext>` be set to true in the *.csproj* file:
+
+
+```xml
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+```
+
+Projects missing this element will generate an error similar to the following:
+```
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: 'One or more compilation failures occurred:
+ooebhccx.1bd(4,62): error CS0012: The type 'Attribute' is defined in an assembly that is not referenced. You must add a reference to assembly 'netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'.
+```
+
 
 ## Refactoring to use middleware
 
@@ -125,12 +142,10 @@ With this middleware in place and some helpful extension methods created to make
 Following this refactoring, you're confident that the web application still works as before, since your integration tests are all passing.
 
 > [!NOTE]
-> It's a good idea to commit your changes to source control after you complete a refactoring and your tests pass. If you're practicing Test Driven Development, [consider adding Commit to your Red-Green-Refactor cycle](http://ardalis.com/rgrc-is-the-new-red-green-refactor-for-test-first-development).
+> It's a good idea to commit your changes to source control after you complete a refactoring and your tests pass. If you're practicing Test Driven Development, [consider adding Commit to your Red-Green-Refactor cycle](https://ardalis.com/rgrc-is-the-new-red-green-refactor-for-test-first-development).
 
 ## Resources
 
 * [Unit testing](https://docs.microsoft.com/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-
 * [Middleware](xref:fundamentals/middleware)
-
 * [Testing controllers](xref:mvc/controllers/testing)

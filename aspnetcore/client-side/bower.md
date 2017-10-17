@@ -2,7 +2,7 @@
 title: Using Bower in ASP.NET Core
 author: rick-anderson
 description: Managing client-side packages with Bower.
-keywords: ASP.NET Core, bower
+keywords: ASP.NET Core,bower
 ms.author: riande
 manager: wpickett
 ms.date: 02/14/2017
@@ -15,9 +15,9 @@ ms.custom: H1Hack27Feb2017
 ---
 # Manage client-side packages with Bower in ASP.NET Core
 
-By [Rick Anderson](https://twitter.com/RickAndMSFT), [Noel Rice](http://blog.falafel.com/author/noel-rice/), and [Scott Addie](https://scottaddie.com) 
+By [Rick Anderson](https://twitter.com/RickAndMSFT), [Noel Rice](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/), and [Scott Addie](https://scottaddie.com) 
 
-[Bower](https://bower.io/) calls itself "A package manager for the web." Within the .NET ecosystem, it fills the void left by NuGet’s inability to deliver static content files. For ASP.NET Core projects, these static files are inherent to client-side libraries like [jQuery](http://jquery.com/) and [Bootstrap](http://getbootstrap.com/). For .NET libraries, you still use [NuGet](https://nuget.org/) package manager.
+[Bower](https://bower.io/) calls itself "A package manager for the web." Within the .NET ecosystem, it fills the void left by NuGet’s inability to deliver static content files. For ASP.NET Core projects, these static files are inherent to client-side libraries like [jQuery](http://jquery.com/) and [Bootstrap](http://getbootstrap.com/). For .NET libraries, you still use [NuGet](https://www.nuget.org/) package manager.
 
 New projects created with the ASP.NET Core project templates set up the client-side build process. [jQuery](http://jquery.com/) and [Bootstrap](http://getbootstrap.com/) are installed, and Bower is supported.
 
@@ -43,7 +43,7 @@ Open the *bower.json* file and add "font-awesome" to the dependencies. IntelliSe
 
 ![IntelliSense of bower package explorer](bower/_static/add-package.png)
 
-![bower version IntelliSense](bower/_static/version-IntelliSense.png)
+![bower version IntelliSense](bower/_static/version-intelliSense.png)
 
 Bower uses [semantic versioning](http://semver.org/) to organize dependencies. Semantic versioning, also known as SemVer, identifies packages with the numbering scheme \<major>.\<minor>.\<patch>. IntelliSense simplifies semantic versioning by showing only a few common choices. The top item in the IntelliSense list (4.6.3 in the example above) is considered the latest stable version of the package. The caret (^) symbol matches the most recent major version and the tilde (~) matches the most recent minor version.
 

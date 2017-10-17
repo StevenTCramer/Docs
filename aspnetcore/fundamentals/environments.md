@@ -1,8 +1,8 @@
 ---
-title: Working with Multiple Environments
+title: Working with multiple environments in ASP.NET Core
 author: ardalis
-description: 
-keywords: ASP.NET Core, Environment settings, ASPNETCORE_ENVIRONMENT
+description: Learn how ASP.NET Core provides support for controlling app behavior across multiple environments.
+keywords: ASP.NET Core,Environment settings,ASPNETCORE_ENVIRONMENT
 ms.author: riande
 manager: wpickett
 ms.date: 10/14/2016
@@ -14,15 +14,15 @@ uid: fundamentals/environments
 ---
 # Working with multiple environments
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core provides support for controlling app behavior across multiple environments, such as development, staging, and production. Environment variables are used to indicate the runtime environment, allowing the app to be configured for that environment.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/environments/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/environments/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## Development, Staging, Production
 
-ASP.NET Core references a particular [environment variable](https://github.com/aspnet/Home/wiki/Environment-Variables), `ASPNETCORE_ENVIRONMENT` to describe the environment the application is currently running in. This variable can be set to any value you like, but three values are used by convention: `Development`, `Staging`, and `Production`. You will find these values used in the samples and templates provided with ASP.NET Core.
+ASP.NET Core references a particular environment variable, `ASPNETCORE_ENVIRONMENT` to describe the environment the application is currently running in. This variable can be set to any value you like, but three values are used by convention: `Development`, `Staging`, and `Production`. You will find these values used in the samples and templates provided with ASP.NET Core.
 
 The current environment setting can be detected programmatically from within your application. In addition, you can use the Environment [tag helper](../mvc/views/tag-helpers/index.md) to include certain sections in your [view](../mvc/views/index.md) based on the current application environment.
 
@@ -45,7 +45,7 @@ Here is a `launchSettings.json` file that includes profiles for `Development` an
 Changes made to project profiles may not take effect until the web server used is restarted (in particular, Kestrel must be restarted before it will detect changes made to its environment).
 
 >[!WARNING]
-> Environment variables stored in *launchSettings.json* are not secured in any way and will be part of the source code repository for your project, if you use one. **Never store credentials or other secret data in this file.** If you need a place to store such data, use the *Secret Manager* tool described in [Safe storage of app secrets during development](../security/app-secrets.md#security-app-secrets).
+> Environment variables stored in *launchSettings.json* are not secured in any way and will be part of the source code repository for your project, if you use one. **Never store credentials or other secret data in this file.** If you need a place to store such data, use the *Secret Manager* tool described in [Safe storage of app secrets during development](xref:security/app-secrets).
 
 ### Staging
 
@@ -88,6 +88,14 @@ These commands take effect only for the current window. When the window is close
 ![System Advanced Properties](environments/_static/systemsetting_environment.png)
 
 ![ASPNET Core Environment Variable](environments/_static/windows_aspnetcore_environment.png) 
+
+**web.config**
+
+See the *Setting environment variables* section of the [ASP.NET Core Module configuration reference](xref:hosting/aspnet-core-module#setting-environment-variables) topic.
+
+**Per IIS Application Pool**
+
+If you need to set environment variables for individual apps running in isolated Application Pools (supported on IIS 10.0+), see the *AppCmd.exe command* section of the [Environment Variables \<environmentVariables>](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) topic in the IIS reference documentation.
 
 ### macOS
 Setting the current environment for macOS can be done in-line when running the application;

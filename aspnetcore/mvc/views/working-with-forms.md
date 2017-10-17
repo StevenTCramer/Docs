@@ -2,7 +2,7 @@
 title: Tag helpers in forms in ASP.NET Core
 author: rick-anderson
 description: Describes the built-in Tag Helpers used with Forms.
-keywords: ASP.NET Core, Tag Helper, TagHelper, HTML Form, Forms
+keywords: ASP.NET Core,Tag Helper,TagHelper,HTML Form,Forms
 ms.author: riande
 manager: wpickett
 ms.date: 02/14/2017
@@ -21,7 +21,7 @@ This document demonstrates working with Forms and the HTML elements commonly use
 
 In many cases, HTML Helpers provide an alternative approach to a specific Tag Helper, but it's important to recognize that Tag Helpers do not replace HTML Helpers and there is not a Tag Helper for each HTML Helper. When an HTML Helper alternative exists, it is mentioned.
 
-<a name=my-asp-route-param-ref-label></a>
+<a name="my-asp-route-param-ref-label"></a>
 
 ## The Form Tag Helper
 
@@ -29,7 +29,7 @@ The [Form](https://www.w3.org/TR/html401/interact/forms.html) Tag Helper:
 
 * Generates the HTML [\<FORM>](https://www.w3.org/TR/html401/interact/forms.html) `action` attribute value for a MVC controller action or named route
 
-* Generates a hidden [Request Verification Token](http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) to prevent cross-site request forgery (when used with the `[ValidateAntiForgeryToken]` attribute in the HTTP Post action method)
+* Generates a hidden [Request Verification Token](https://docs.microsoft.com/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) to prevent cross-site request forgery (when used with the `[ValidateAntiForgeryToken]` attribute in the HTTP Post action method)
 
 * Provides the `asp-route-<Parameter Name>` attribute, where `<Parameter Name>` is added to the route values. The  `routeValues` parameters to `Html.BeginForm` and `Html.BeginRouteForm` provide similar functionality.
 
@@ -46,9 +46,9 @@ The Form Tag Helper above generates the following HTML:
      <!-- Input and Submit elements -->
      <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>" />
     </form>
-   ```
+```
 
-The MVC runtime generates the `action` attribute value from the Form Tag Helper attributes `asp-controller` and `asp-action`. The Form Tag Helper also generates a hidden [Request Verification Token](http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) to prevent cross-site request forgery (when used with the `[ValidateAntiForgeryToken]` attribute in the HTTP Post action method). Protecting a pure HTML Form from cross-site request forgery is difficult, the Form Tag Helper provides this service for you.
+The MVC runtime generates the `action` attribute value from the Form Tag Helper attributes `asp-controller` and `asp-action`. The Form Tag Helper also generates a hidden [Request Verification Token](https://docs.microsoft.com/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) to prevent cross-site request forgery (when used with the `[ValidateAntiForgeryToken]` attribute in the HTTP Post action method). Protecting a pure HTML Form from cross-site request forgery is difficult, the Form Tag Helper provides this service for you.
 
 ### Using a named route
 
@@ -56,15 +56,13 @@ The `asp-route` Tag Helper attribute can also generate markup for the HTML `acti
 
 [!code-HTML[Main](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
-Many of the views in the *Views/Account* folder (generated when you create a new web app with *Individual User Accounts*) contain the [asp-route-returnurl](http://docs.asp.net/en/latest/mvc/views/working-with-forms.html#the-form-tag-helper) attribute:
+Many of the views in the *Views/Account* folder (generated when you create a new web app with *Individual User Accounts*) contain the [asp-route-returnurl](https://docs.microsoft.com/aspnet/core/mvc/views/working-with-forms) attribute:
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "none", "highlight_args": {"hl_lines": [2]}} -->
-
-```none
+```cshtml
 <form asp-controller="Account" asp-action="Login"
      asp-route-returnurl="@ViewData["ReturnUrl"]"
      method="post" class="form-horizontal" role="form">
-   ```
+```
 
 >[!NOTE]
 >With the built in templates, `returnUrl` is only populated automatically when you try to access an authorized resource but are not authenticated or authorized. When you attempt an unauthorized access, the security middleware redirects you to the login page with the `returnUrl` set.
@@ -77,17 +75,17 @@ Syntax:
 
 ```HTML
 <input asp-for="<Expression Name>" />
-   ```
+```
 
 The Input Tag Helper:
 
-* Generates the `id` and `name` HTML attributes for the expression name specified in the `asp-for` attribute.  `asp-for="Property1.Property2"` is equivalent to `m => m.Property1.Property2`, that is the attribute value literally is part of an expression. The name of the expression is what's used for the `asp-for` attribute value.
+* Generates the `id` and `name` HTML attributes for the expression name specified in the `asp-for` attribute. `asp-for="Property1.Property2"` is equivalent to `m => m.Property1.Property2`. The name of the expression is what is used for the `asp-for` attribute value. See the [Expression names](#expression-names) section for additional information.
 
-* Sets the HTML `type` attribute value based on the model type and  [data annotation](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.aspx) attributes applied to the model property
+* Sets the HTML `type` attribute value based on the model type and  [data annotation](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) attributes applied to the model property
 
 * Will not overwrite the HTML `type` attribute value when one is specified
 
-* Generates [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)  validation attributes from [data annotation](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.aspx) attributes applied to model properties
+* Generates [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)  validation attributes from [data annotation](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) attributes applied to model properties
 
 * Has an HTML Helper feature overlap with `Html.TextBoxFor` and `Html.EditorFor`. See the **HTML Helper alternatives to Input Tag Helper** section for details.
 
@@ -116,7 +114,7 @@ The `Input` Tag Helper sets the HTML `type` attribute based on the .NET type. Th
 |Single, Double|type=”number”|
 
 
-The following table shows some common [data annotations](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.aspx) attributes that the input tag helper will map to specific input types (not every validation attribute is listed):
+The following table shows some common [data annotations](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) attributes that the input tag helper will map to specific input types (not every validation attribute is listed):
 
 
 |Attribute|Input Type|
@@ -152,7 +150,7 @@ The code above generates the following HTML:
        <button type="submit">Register</button>
      <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>" />
    </form>
-   ```
+```
 
 The data annotations applied to the `Email` and `Password` properties generate metadata on the model. The Input Tag Helper consumes the model metadata and produces [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` attributes (see [Model Validation](../models/validation.md)). These attributes describe the validators to attach to the input fields. This provides unobtrusive HTML5 and [jQuery](https://jquery.com/) validation. The unobtrusive attributes have the format `data-val-rule="Error Message"`, where rule is the name of the validation rule (such as `data-val-required`, `data-val-email`, `data-val-maxlength`, etc.) If an error message is provided in the attribute, it is displayed as the value for the `data-val-rule` attribute. There are also attributes of the form `data-val-ruleName-argumentName="argumentValue"` that provide additional details about the rule, for example, `data-val-maxlength-max="1024"` .
 
@@ -204,7 +202,7 @@ The following HTML is generated for `Address.AddressLine1`:
 
 ```HTML
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="" />
-   ```
+```
 
 ### Expression names and Collections
 
@@ -220,7 +218,7 @@ public IActionResult Edit(int id, int colorIndex)
        ViewData["Index"] = colorIndex;
        return View(GetPerson(id));
    }
-   ```
+```
 
 The following Razor shows how you access a specific `Color` element:
 
@@ -255,7 +253,7 @@ The *Views/Shared/EditorTemplates/ToDoItem.cshtml* template:
 
 The `Textarea Tag Helper` tag helper is  similar to the Input Tag Helper.
 
-* Generates the `id` and `name` attributes, and the data validation attributes from the model for a [\<textarea>](http://www.w3.org/wiki/HTML/Elements/textarea) element.
+* Generates the `id` and `name` attributes, and the data validation attributes from the model for a [\<textarea>](https://www.w3.org/wiki/HTML/Elements/textarea) element.
 
 * Provides strong typing.
 
@@ -268,8 +266,6 @@ Sample:
 [!code-HTML[Main](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
 
 The following HTML is generated:
-
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [2, 3, 4, 5, 6, 7, 8]}} -->
 
 ```HTML
 <form method="post" action="/Demo/RegisterTextArea">
@@ -309,7 +305,7 @@ The following HTML is generated for the `<label>` element:
 
 ```HTML
 <label for="Email">Email Address</label>
-   ```
+```
 
 The Label Tag Helper generated the `for` attribute value of "Email", which is the ID associated with the `<input>` element. The Tag Helpers generate consistent `id` and `for` elements so they can be correctly associated. The caption in this sample comes from the `Display` attribute. If the model didn't contain a `Display` attribute, the caption would be the property name of the expression.
 
@@ -329,7 +325,7 @@ The `Validation Message Tag Helper`  is used with the `asp-validation-for` attri
 
 ```HTML
 <span asp-validation-for="Email"></span>
-   ```
+```
 
 The Validation Message Tag Helper will generate the following HTML:
 
@@ -377,8 +373,6 @@ In the following example, the data model is decorated with `DataAnnotation` attr
 
 The generated HTML (when the model is valid):
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [2, 3, 8, 9, 12, 13]}} -->
-
 ```HTML
 <form action="/DemoReg/Register" method="post">
   <div class="validation-summary-valid" data-valmsg-summary="true">
@@ -422,13 +416,11 @@ The HTTP POST `Index` method displays the selection:
 
 The `Index` view:
 
-[!code-HTML[Main](working-with-forms/sample/final/Views/Home/Index.cshtml?highlight=4)]
+[!code-cshtml[Main](working-with-forms/sample/final/Views/Home/Index.cshtml?highlight=4)]
 
 Which generates the following HTML (with "CA" selected):
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [2, 3, 4, 5, 6]}} -->
-
-```HTML
+```html
 <form method="post" action="/">
      <select id="Country" name="Country">
        <option value="MX">Mexico</option>
@@ -438,7 +430,7 @@ Which generates the following HTML (with "CA" selected):
        <br /><button type="submit">Register</button>
      <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>" />
    </form>
-   ```
+```
 
 > [!NOTE]
 > We do not recommend using `ViewBag` or `ViewData` with the Select Tag Helper. A view model is more robust at providing MVC metadata and generally less problematic.
@@ -467,8 +459,6 @@ You can decorate your enumerator list with the `Display` attribute to get a rich
 
 The following HTML is generated:
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [4, 5]}} -->
-
 ```HTML
   <form method="post" action="/Home/IndexEnum">
          <select data-val="true" data-val-required="The EnumCountry field is required."
@@ -483,7 +473,7 @@ The following HTML is generated:
          <br /><button type="submit">Register</button>
          <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>" />
     </form>
-   ```
+```
 
 ### Option Group
 
@@ -498,8 +488,6 @@ The two groups are shown below:
 ![option group example](working-with-forms/_static/grp.png)
 
 The generated HTML:
-
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}} -->
 
 ```HTML
  <form method="post" action="/Home/IndexGroup">
@@ -531,8 +519,6 @@ With the following view:
 [!code-HTML[Main](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
 Generates the following HTML:
-
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [3]}} -->
 
 ```HTML
 <form method="post" action="/Home/IndexMultiSelect">
@@ -568,8 +554,6 @@ Adding HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) elements i
 
 The correct `<option>` element will be selected ( contain the `selected="selected"` attribute) depending on the current `Country` value.
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "HTML", "highlight_args": {"hl_lines": [5]}} -->
-
 ```HTML
  <form method="post" action="/Home/IndexEmpty">
       <select id="Country" name="Country">
@@ -589,12 +573,12 @@ The correct `<option>` element will be selected ( contain the `selected="selecte
 
 * [HTML Form element](https://www.w3.org/TR/html401/interact/forms.html)
 
-* [Request Verification Token](http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
+* [Request Verification Token](https://docs.microsoft.com/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
 
 * [Model Binding](../models/model-binding.md)
 
 * [Model Validation](../models/validation.md)
 
-* [data annotations](https://msdn.microsoft.com/library/system.componentmodel.dataannotations.aspx)
+* [data annotations](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter)
 
 * [Code snippets for this document](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/forms/sample).

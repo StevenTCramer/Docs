@@ -2,7 +2,7 @@
 title: Using AngularJS for Single Page Applications (SPAs)
 author: rick-anderson
 description: Learn how to build a SPA-style ASP.NET application using AngularJS
-keywords: ASP.NET Core, AngularJS, SPA
+keywords: ASP.NET Core,AngularJS,SPA
 ms.author: riande
 manager: wpickett
 ms.date: 10/14/2016
@@ -16,17 +16,17 @@ ms.custom: H1Hack27Feb2017
 # Using AngularJS for Single Page Applications (SPAs) with ASP.NET Core
 
 
-By [Venkata Koppaka](http://blog.falafel.com/author/venkata-koppaka/) and [Scott Addie](https://scottaddie.com)
+By [Venkata Koppaka](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/) and [Scott Addie](https://scottaddie.com)
 
 In this article, you will learn how to build a SPA-style ASP.NET application using AngularJS.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/client-side/angular/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/client-side/angular/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## What is AngularJS?
 
-[AngularJS](http://angularjs.org/) is a modern JavaScript framework from Google commonly used to work with Single Page Applications (SPAs). AngularJS is open sourced under MIT license, and the development progress of AngularJS can be followed on [its GitHub repository](https://github.com/angular/angular.js). The library is called Angular because HTML uses angular-shaped brackets.
+[AngularJS](https://angularjs.org/) is a modern JavaScript framework from Google commonly used to work with Single Page Applications (SPAs). AngularJS is open sourced under MIT license, and the development progress of AngularJS can be followed on [its GitHub repository](https://github.com/angular/angular.js). The library is called Angular because HTML uses angular-shaped brackets.
 
-AngularJS is not a DOM manipulation library like jQuery, but it uses a subset of jQuery called jQLite. AngularJS is primarily based on declarative HTML attributes that you can add to your HTML tags. You can try AngularJS in your browser using the [Code School website](https://www.codeschool.com/courses/shaping-up-with-angular-js) or  [W3Schools website](https://www.w3schools.com/angular/).
+AngularJS is not a DOM manipulation library like jQuery, but it uses a subset of jQuery called jQLite. AngularJS is primarily based on declarative HTML attributes that you can add to your HTML tags. You can try AngularJS in your browser using the [Code School website](https://www.codeschool.com/courses/shaping-up-with-angularjs) or  [W3Schools website](https://www.w3schools.com/angular/).
 
 This article focuses on AngularJS with some notes on where Angular is heading.
 
@@ -38,7 +38,7 @@ To start using AngularJS in your ASP.NET application, you must either install it
 
 There are several ways to add AngularJS to your application. If you’re starting a new ASP.NET Core web application in Visual Studio, you can add AngularJS using the built-in [Bower](bower.md) support. Open *bower.json*, and add an entry to the `dependencies` property:
 
-<a name=angular-bower-json></a>
+<a name="angular-bower-json"></a>
 
 [!code-json[Main](../client-side/angular/sample/AngularJSSample/src/AngularJSSample/bower.json?highlight=9)]
 
@@ -394,4 +394,4 @@ For more detail on AngularJS built-in event handler directives, be sure to head 
 
 * [Angular Docs](https://docs.angularjs.org)
 
-* [Angular 2 Info](http://angular.io)
+* [Angular 2 Info](https://angular.io/)

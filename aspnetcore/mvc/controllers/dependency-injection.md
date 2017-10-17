@@ -14,17 +14,17 @@ uid: mvc/controllers/dependency-injection
 ---
 # Dependency injection into controllers
 
-<a name=dependency-injection-controllers></a>
+<a name="dependency-injection-controllers"></a>
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core MVC controllers should request their dependencies explicitly via their constructors. In some instances, individual controller actions may require a service, and it may not make sense to request at the controller level. In this case, you can also choose to inject a service as a parameter on the action method.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## Dependency Injection
 
-Dependency injection is a technique that follows the [Dependency Inversion Principle](http://deviq.com/dependency-inversion-principle), allowing for applications to be composed of loosely coupled modules. ASP.NET Core has built-in support for [dependency injection](../../fundamentals/dependency-injection.md), which makes applications easier to test and maintain.
+Dependency injection is a technique that follows the [Dependency Inversion Principle](http://deviq.com/dependency-inversion-principle/), allowing for applications to be composed of loosely coupled modules. ASP.NET Core has built-in support for [dependency injection](../../fundamentals/dependency-injection.md), which makes applications easier to test and maintain.
 
 ## Constructor Injection
 
@@ -43,8 +43,6 @@ With this in place, we can use the service in our controller. In this case, we h
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Controllers/HomeController.cs?highlight=8,10,12,17,18,19,20,21,22,23,24,25,26,27,28,29,30&range=1-31,51-52)]
 
 If we run the application now, we will most likely encounter an error:
-
-<!-- literal_block {"ids": [], "xml:space": "preserve"} -->
 
 ```
 An unhandled exception occurred while processing the request.
@@ -65,11 +63,9 @@ Once the service has been configured, running the application and navigating to 
 ![Server Greeting](dependency-injection/_static/server-greeting.png)
 
 >[!TIP]
-> See [Testing Controller Logic](testing.md) to learn how to explicitly request dependencies [http://deviq.com/explicit-dependencies-principle](http://deviq.com/explicit-dependencies-principle) in controllers makes code easier to test.
+> See [Testing Controller Logic](testing.md) to learn how to explicitly request dependencies [http://deviq.com/explicit-dependencies-principle/](http://deviq.com/explicit-dependencies-principle/) in controllers makes code easier to test.
 
 ASP.NET Core's built-in dependency injection supports having only a single constructor for classes requesting services. If you have more than one constructor, you may get an exception stating:
-
-<!-- literal_block {"ids": [], "xml:space": "preserve"} -->
 
 ```
 An unhandled exception occurred while processing the request.

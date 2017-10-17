@@ -2,10 +2,10 @@
 title: File uploads in ASP.NET Core
 author: ardalis
 description: How to use model binding and streaming to upload files in ASP.NET Core MVC.
-keywords: ASP.NET Core, file upload, model binding, IFormFile, streaming
+keywords: ASP.NET Core,file upload,model binding,IFormFile,streaming
 ms.author: riande
 manager: wpickett
-ms.date: 7/5/2017
+ms.date: 07/05/2017
 ms.topic: article
 ms.assetid: ebc98159-a028-4a94-b06c-43981c79c6be
 ms.technology: aspnet
@@ -14,7 +14,7 @@ uid: mvc/models/file-uploads
 ---
 # File uploads in ASP.NET Core
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 ASP.NET MVC actions support uploading of one or more files using simple model binding for smaller files or streaming for larger files.
 
@@ -70,7 +70,7 @@ When uploading files using model binding and the `IFormFile` interface, the acti
 
 [!code-csharp[Main](file-uploads/sample/FileUploadSample/Controllers/UploadFilesController.cs?name=snippet1)]
 
-Files uploaded using the `IFormFile` technique are buffered in memory or on disk on the web server before being processed. Inside the action method, the `IFormFile` contents are accessible as a stream. In addition to the local file system, files can be streamed to [Azure Blob storage](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-blobs) or [Entity Framework](https://docs.microsoft.com/ef/core/index).
+Files uploaded using the `IFormFile` technique are buffered in memory or on disk on the web server before being processed. Inside the action method, the `IFormFile` contents are accessible as a stream. In addition to the local file system, files can be streamed to [Azure Blob storage](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-blobs/) or [Entity Framework](https://docs.microsoft.com/ef/core/index).
 
 To store binary file data in a database using Entity Framework, define a property of type `byte[]` on the entity:
 
@@ -158,7 +158,7 @@ The `DisableFormValueModelBinding` attribute, shown below, is used to disable mo
 
 [!code-csharp[Main](file-uploads/sample/FileUploadSample/Filters/DisableFormValueModelBindingAttribute.cs?name=snippet1)]
 
-Since model binding is disabled, the `Upload` action method doesn't accept parameters. It works directly with the `Request` property of `ControllerBase`. A `MultipartReader` is used to read each section. The file is saved with a GUID filename and the the key/value data is stored in a `KeyValueAccumulator`. Once all sections have been read, the contents of the `KeyValueAccumulator` are used to bind the form data to a model type.
+Since model binding is disabled, the `Upload` action method doesn't accept parameters. It works directly with the `Request` property of `ControllerBase`. A `MultipartReader` is used to read each section. The file is saved with a GUID filename and the key/value data is stored in a `KeyValueAccumulator`. Once all sections have been read, the contents of the `KeyValueAccumulator` are used to bind the form data to a model type.
 
 The complete `Upload` method is shown below:
 
@@ -192,7 +192,7 @@ The default setting is `30000000`, which is approximately 28.6MB. The value can 
 </system.webServer>
 ```
 
-This setting only applies to IIS. The behavior doesn't occur by default when hosting on Kestrel. For more information, see [Request Limits \<requestLimits\>](https://www.iis.net/configreference/system.webserver/security/requestfiltering/requestlimits).
+This setting only applies to IIS. The behavior doesn't occur by default when hosting on Kestrel. For more information, see [Request Limits \<requestLimits\>](https://docs.microsoft.com/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 ### Null Reference Exception with IFormFile
 

@@ -2,7 +2,7 @@
 title: ASP.NET Core MVC with EF Core - Concurrency - 8 of 10
 author: tdykstra
 description: This tutorial shows how to handle conflicts when multiple users update the same entity at the same time.
-keywords: ASP.NET Core, Entity Framework Core, concurrency
+keywords: ASP.NET Core,Entity Framework Core,concurrency
 ms.author: tdykstra
 manager: wpickett
 ms.date: 03/15/2017
@@ -17,9 +17,9 @@ uid: data/ef-mvc/concurrency
 
 By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-The Contoso University sample web application demonstrates how to create ASP.NET Core 1.1 MVC web applications using Entity Framework Core 1.1 and Visual Studio 2017. For information about the tutorial series, see [the first tutorial in the series](intro.md).
+The Contoso University sample web application demonstrates how to create ASP.NET Core MVC web applications using Entity Framework Core and Visual Studio. For information about the tutorial series, see [the first tutorial in the series](intro.md).
 
-In earlier tutorials you learned how to update data. This tutorial shows how to handle conflicts when multiple users update the same entity at the same time.
+In earlier tutorials, you learned how to update data. This tutorial shows how to handle conflicts when multiple users update the same entity at the same time.
 
 You'll create web pages that work with the Department entity and handle concurrency errors. The following illustrations show the Edit and Delete pages, including some messages that are displayed if a concurrency conflict occurs.
 
@@ -104,6 +104,9 @@ Save your changes and build the project, and then enter the following commands i
 
 ```console
 dotnet ef migrations add RowVersion
+```
+
+```console
 dotnet ef database update
 ```
 
@@ -125,7 +128,7 @@ Replace the code in *Views/Departments/Index.cshtml* with the following code.
 
 [!code-html[Main](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
-This changes the heading to "Departments" deletes the RowVersion column, and shows full name instead of first name for the administrator.
+This changes the heading to "Departments", deletes the RowVersion column, and shows full name instead of first name for the administrator.
 
 ## Update the Edit methods in the Departments controller
 
@@ -169,19 +172,15 @@ The `ModelState.Remove` statement is required because `ModelState` has the old `
 
 In *Views/Departments/Edit.cshtml*, make the following changes:
 
-* Remove the `<div>` element that was scaffolded for the `RowVersion` field.
-
 * Add a hidden field to save the `RowVersion` property value, immediately following the hidden field for the `DepartmentID` property.
 
 * Add a "Select Administrator" option to the drop-down list.
 
-[!code-html[Main](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=15,41-43)]
+[!code-html[Main](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## Test concurrency conflicts in the Edit page
 
-Run the site and click Departments to go to the Departments Index page.
-
-Right click the **Edit** hyperlink for the English department and select **Open in new tab**, then click the **Edit** hyperlink for the English department. The two browser tabs now display the same information.
+Run the app and go to the Departments Index page. Right-click the **Edit** hyperlink for the English department and select **Open in new tab**, then click the **Edit** hyperlink for the English department. The two browser tabs now display the same information.
 
 Change a field in the first browser tab and click **Save**.
 
@@ -205,15 +204,15 @@ For the Delete page, the Entity Framework detects concurrency conflicts caused b
 
 ### Update the Delete methods in the Departments controller
 
-In *DepartmentController.cs*, replace the HttpGet `Delete` method with the following code:
+In *DepartmentsController.cs*, replace the HttpGet `Delete` method with the following code:
 
-[!code-csharp[Main](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,14-17,21-29)]
+[!code-csharp[Main](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
-The method accepts an optional parameter that indicates whether the page is being redisplayed after a concurrency error. If this flag is true and the department specified no longer exists, it was deleted by another user. In that case, the code redirects to the Index page.  If this flag is true and the Department does exist, it was changed by another user. In that case, the code sends sends an error message to the view using `ViewData`.  
+The method accepts an optional parameter that indicates whether the page is being redisplayed after a concurrency error. If this flag is true and the department specified no longer exists, it was deleted by another user. In that case, the code redirects to the Index page.  If this flag is true and the Department does exist, it was changed by another user. In that case, the code sends an error message to the view using `ViewData`.  
 
 Replace the code in the HttpPost `Delete` method (named `DeleteConfirmed`) with the following code:
 
-[!code-csharp[Main](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeletePost&highlight=3,7,14,15,16,17,18)]
+[!code-csharp[Main](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeletePost&highlight=1,3,5-8,11-18)]
 
 In the scaffolded code that you just replaced, this method accepted only a record ID:
 
@@ -236,21 +235,21 @@ If a concurrency error is caught, the code redisplays the Delete confirmation pa
 
 ### Update the Delete view
 
-In *Views/Department/Delete.cshtml*, replace the scaffolded code with the following code that adds an error message field and hidden fields for the DepartmentID and RowVersion properties. The changes are highlighted.
+In *Views/Departments/Delete.cshtml*, replace the scaffolded code with the following code that adds an error message field and hidden fields for the DepartmentID and RowVersion properties. The changes are highlighted.
 
-[!code-html[Main](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,43-44)]
+[!code-html[Main](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 This makes the following changes:
 
 * Adds an error message between the `h2` and `h3` headings.
 
-* Replaces LastName with FullName in the **Administrator** field.
+* Replaces FirstMidName with FullName in the **Administrator** field.
 
 * Removes the RowVersion field.
 
-* Adds hidden fields for the `DepartmentID` and `RowVersion` properties.
+* Adds a hidden field for the `RowVersion` property.
 
-Run the Departments Index page. Right click the **Delete** hyperlink for the English department and select **Open in new tab**, then in the first tab click the **Edit** hyperlink for the English department.
+Run the app and go to the Departments Index page. Right-click the **Delete** hyperlink for the English department and select **Open in new tab**, then in the first tab click the **Edit** hyperlink for the English department.
 
 In the first window, change one of the values, and click **Save**:
 
@@ -272,7 +271,7 @@ Replace the code in *Views/Departments/Details.cshtml* to delete the RowVersion 
 
 Replace the code in *Views/Departments/Create.cshtml* to add a Select option to the drop-down list.
 
-[!code-html[Main](intro/samples/cu/Views/Departments/Create.cshtml?highlight=38-40)]
+[!code-html[Main](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## Summary
 

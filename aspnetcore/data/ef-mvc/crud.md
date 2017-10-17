@@ -2,7 +2,7 @@
 title: ASP.NET Core MVC with EF Core - CRUD - 2 of 10
 author: tdykstra
 description: 
-keywords: ASP.NET Core, Entity Framework Core, CRUD, create, read, update, delete
+keywords: ASP.NET Core,Entity Framework Core,CRUD,create,read,update,delete
 ms.author: tdykstra
 manager: wpickett
 ms.date: 03/15/2017
@@ -16,9 +16,9 @@ uid: data/ef-mvc/crud
 
 By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-The Contoso University sample web application demonstrates how to create ASP.NET Core 1.1 MVC web applications using Entity Framework Core 1.1 and Visual Studio 2017. For information about the tutorial series, see [the first tutorial in the series](intro.md).
+The Contoso University sample web application demonstrates how to create ASP.NET Core MVC web applications using Entity Framework Core and Visual Studio. For information about the tutorial series, see [the first tutorial in the series](intro.md).
 
-In the previous tutorial you created an MVC application that stores and displays data using the Entity Framework and SQL Server LocalDB. In this tutorial you'll review and customize the CRUD (create, read, update, delete) code that the MVC scaffolding automatically creates for you in controllers and views.
+In the previous tutorial, you created an MVC application that stores and displays data using the Entity Framework and SQL Server LocalDB. In this tutorial, you'll review and customize the CRUD (create, read, update, delete) code that the MVC scaffolding automatically creates for you in controllers and views.
 
 > [!NOTE] 
 > It's a common practice to implement the repository pattern in order to create an abstraction layer between your controller and the data access layer. To keep these tutorials simple and focused on teaching how to use the Entity Framework itself, they don't use repositories. For information about repositories with EF, see [the last tutorial in this series](advanced.md).
@@ -35,7 +35,7 @@ In this tutorial, you'll work with the following web pages:
 
 ## Customize the Details page
 
-The scaffolded code for the Students Index page left out the `Enrollments` property, because that property holds a collection. In the **Details** page you'll display the contents of the collection in an HTML table.
+The scaffolded code for the Students Index page left out the `Enrollments` property, because that property holds a collection. In the **Details** page, you'll display the contents of the collection in an HTML table.
 
 In *Controllers/StudentsController.cs*, the action method for the Details view uses the `SingleOrDefaultAsync` method to retrieve a single `Student` entity. Add code that calls `Include`. `ThenInclude`,  and `AsNoTracking` methods, as shown in the following highlighted code.
 
@@ -49,7 +49,7 @@ The `AsNoTracking` method improves performance in scenarios where the entities r
 
 The key value that is passed to the `Details` method comes from *route data*. Route data is data that the model binder found in a segment of the URL. For example, the default route specifies controller, action, and id segments:
 
-[!code-csharp[Main](intro/samples/cu/Startup.cs?name=snippet_RouteAndSeed&highlight=5)]
+[!code-csharp[Main](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
 In the following URL, the default route maps Instructor as the controller, Index as the action, and 1 as the id; these are route data values.
 
@@ -91,7 +91,7 @@ For more information about tag helpers, see [Tag helpers in ASP.NET Core](xref:m
 
 ### Add enrollments to the Details view
 
-Open *Views/Students/Details.cshtml*. Each field is displayed using `DisplayNameFor` and `DisplayFor` helper, as shown in the following example:
+Open *Views/Students/Details.cshtml*. Each field is displayed using `DisplayNameFor` and `DisplayFor` helpers, as shown in the following example:
 
 [!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
@@ -103,7 +103,7 @@ If code indentation is wrong after you paste the code, press CTRL-K-D to correct
 
 This code loops through the entities in the `Enrollments` navigation property. For each enrollment, it displays the course title and the grade. The course title is retrieved from the Course entity that's stored in the `Course` navigation property of the Enrollments entity.
 
-Run the application, select the **Students** tab, and click the **Details** link for a student. You see the list of courses and grades for the selected student:
+Run the app, select the **Students** tab, and click the **Details** link for a student. You see the list of courses and grades for the selected student:
 
 ![Student Details page](crud/_static/student-details.png)
 
@@ -117,9 +117,9 @@ This code adds the Student entity created by the ASP.NET MVC model binder to the
 
 You removed `ID` from the `Bind` attribute because ID is the primary key value which SQL Server will set automatically when the row is inserted. Input from the user does not set the ID value.
 
-Other than the `Bind` attribute, the try-catch block is the only change you've made to the scaffolded code. If an exception that derives from `DbUpdateException` is caught while the changes are being saved, a generic error message is displayed. `DbUpdateException` exceptions are sometimes caused by something external to the application rather than a programming error, so the user is advised to try again. Although not implemented in this sample, a production quality application would log the exception. For more information, see the **Log for insight** section in [Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
+Other than the `Bind` attribute, the try-catch block is the only change you've made to the scaffolded code. If an exception that derives from `DbUpdateException` is caught while the changes are being saved, a generic error message is displayed. `DbUpdateException` exceptions are sometimes caused by something external to the application rather than a programming error, so the user is advised to try again. Although not implemented in this sample, a production quality application would log the exception. For more information, see the **Log for insight** section in [Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](https://docs.microsoft.com/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
 
-The `ValidateAntiForgeryToken` attribute helps prevent cross-site request forgery (CSRF) attacks. The token is automatically injected into the view by the [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) and is included when the form is submitted by the user. The token is validated by the `ValidateAntiForgeryToken` attribute. For more information about CSRF, see [🔧 Anti-Request Forgery](../../security/anti-request-forgery.md).
+The `ValidateAntiForgeryToken` attribute helps prevent cross-site request forgery (CSRF) attacks. The token is automatically injected into the view by the [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) and is included when the form is submitted by the user. The token is validated by the `ValidateAntiForgeryToken` attribute. For more information about CSRF, see [Anti-Request Forgery](../../security/anti-request-forgery.md).
 
 <a id="overpost"></a>
 ### Security note about overposting
@@ -151,9 +151,9 @@ An alternative way to prevent overposting that is preferred by many developers i
 
 The code in *Views/Students/Create.cshtml* uses `label`, `input`, and `span` (for validation messages) tag helpers for each field.
 
-Run the page by selecting the **Students** tab and clicking **Create New**.
+Run the app, select the **Students** tab, and click **Create New**.
 
-Enter names and an invalid date and click **Create** to see the error message.
+Enter names and a date. Try entering an invalid date if your browser lets you do that. (Some browsers force you to use a date picker.) Then click **Create** to see the error message.
 
 ![Date validation error](crud/_static/date-error.png)
 
@@ -217,7 +217,7 @@ If you want to avoid the read-first approach, but you also want the SQL UPDATE s
 
 ### Test the Edit page
 
-Run the application and select the **Students** tab, then click an **Edit** hyperlink.
+Run the app, select the **Students** tab, then click an **Edit** hyperlink.
 
 ![Students edit page](crud/_static/student-edit.png)
 
@@ -259,7 +259,7 @@ In *Views/Student/Delete.cshtml*, add an error message between the h2 heading an
 
 [!code-html[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
-Run the page by selecting the **Students** tab and clicking a **Delete** hyperlink:
+Run the app, select the **Students** tab, and click a **Delete** hyperlink:
 
 ![Delete confirmation page](crud/_static/student-delete.png)
 
@@ -269,7 +269,7 @@ Click **Delete**. The Index page is displayed without the deleted student. (You'
 
 To free up the resources that a database connection holds, the context instance must be disposed as soon as possible when you are done with it. The ASP.NET Core built-in [dependency injection](../../fundamentals/dependency-injection.md) takes care of that task for you.
 
-In *Startup.cs* you call the [AddDbContext extension method](https://github.com/aspnet/EntityFramework/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) to provision the `DbContext` class in the ASP.NET DI container. That method sets the service lifetime to `Scoped` by default. `Scoped` means the context object lifetime coincides with the web request life time, and the `Dispose` method will be called automatically at the end of the web request.
+In *Startup.cs*, you call the [AddDbContext extension method](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) to provision the `DbContext` class in the ASP.NET DI container. That method sets the service lifetime to `Scoped` by default. `Scoped` means the context object lifetime coincides with the web request life time, and the `Dispose` method will be called automatically at the end of the web request.
 
 ## Handling Transactions
 

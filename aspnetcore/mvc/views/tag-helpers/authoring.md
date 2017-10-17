@@ -2,10 +2,10 @@
 title: Authoring Tag Helpers in ASP.NET Core
 author: rick-anderson
 description: Learn how to author Tag Helpers in ASP.NET Core.
-keywords: ASP.NET Core, tag helpers
+keywords: ASP.NET Core,tag helpers
 ms.author: riande
 manager: wpickett
-ms.date: 6/14/2017
+ms.date: 06/14/2017
 ms.topic: article
 ms.assetid: 4f16d978-5695-4abf-a785-fdaabf3bbcb9
 ms.technology: aspnet
@@ -17,7 +17,7 @@ ms.custom: H1Hack27Feb2017
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## Getting started with Tag Helpers
 
@@ -31,7 +31,7 @@ A tag helper is any class that implements the `ITagHelper` interface. However, w
 
 ## A minimal Tag Helper
 
-In this section you write a tag helper that updates an email tag. For example:
+In this section, you write a tag helper that updates an email tag. For example:
 
 ```html
 <email>Support</email>
@@ -94,7 +94,7 @@ Update the `EmailTagHelper` class with the following:
 
 **Notes:**
 
-* Pascal-cased class and property names for tag helpers are translated into their [lower kebab case](http://stackoverflow.com/questions/11273282/whats-the-name-for-dash-separated-case/12273101#12273101). Therefore, to use the `MailTo` attribute, you'll use `<email mail-to="value"/>` equivalent.
+* Pascal-cased class and property names for tag helpers are translated into their [lower kebab case](https://stackoverflow.com/questions/11273282/whats-the-name-for-dash-separated-case/12273101). Therefore, to use the `MailTo` attribute, you'll use `<email mail-to="value"/>` equivalent.
 
 * The last line sets the completed content for our minimally functional tag helper.
 
@@ -118,7 +118,7 @@ That approach works for the attribute "href" as long as it doesn't currently exi
     
 ### ProcessAsync
 
-In this section we'll write an asynchronous email helper.
+In this section, we'll write an asynchronous email helper.
 
 1.  Replace the `EmailTagHelper` class with the following code:
 
@@ -190,7 +190,7 @@ You can also use the `[HtmlTargetElement]` to change the name of the targeted el
     
     **Notes:**
     
-    * As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [lower kebab case](http://c2.com/cgi/wiki?KebabCase). Therefore, to use the `WebsiteInformationTagHelper` in Razor, you'll write `<website-information />`.
+    * As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [lower kebab case](http://wiki.c2.com/?KebabCase). Therefore, to use the `WebsiteInformationTagHelper` in Razor, you'll write `<website-information />`.
     
     * You are not explicitly identifying the target element with the `[HtmlTargetElement]` attribute, so the default of `website-information` will be targeted. If you applied the following attribute (note it's not kebab case but matches the class name):
     
@@ -206,9 +206,9 @@ You can also use the `[HtmlTargetElement]` to change the name of the targeted el
     
     * Elements that are self-closing have no content. For this example, the Razor markup will use a self-closing tag, but the tag helper will be creating a [section](http://www.w3.org/TR/html5/sections.html#the-section-element) element (which is not self-closing and you are writing content inside the `section` element). Therefore, you need to set `TagMode` to `StartTagAndEndTag` to write output. Alternatively, you can comment out the line setting `TagMode` and write markup with a closing tag. (Example markup is provided later in this tutorial.)
     
-    * The `$` (dollar sign) in the following line uses an [interpolated string](https://msdn.microsoft.com/library/Dn961160.aspx):
+    * The `$` (dollar sign) in the following line uses an [interpolated string](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/interpolated-strings):
     
-    ```html
+    ```cshtml
     $@"<ul><li><strong>Version:</strong> {Info.Version}</li>
     ```
 
@@ -238,12 +238,9 @@ The condition tag helper renders output when passed a true value.
 
     [!code-csharp[Main](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/ConditionTagHelper.cs)]
 
-
 2.  Replace the contents of the *Views/Home/Index.cshtml* file with the following markup:
 
-    <!-- literal_block {"xml:space": "preserve", "source": "mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml", "ids": [], "linenos": false, "highlight_args": {"linenostart": 1}} -->
-    
-    ```
+    ```cshtml
     @using AuthoringTagHelpers.Models
     @model WebsiteContext
     
@@ -270,11 +267,11 @@ The condition tag helper renders output when passed a true value.
 4.  Run the app and browse to the home page. The markup in the conditional `div` will not be rendered. Append the query string `?approved=true` to the URL (for example, `http://localhost:1235/Home/Index?approved=true`). `approved` is set to true and the conditional markup will be displayed.
 
 >[!NOTE]
->Use the [nameof](https://msdn.microsoft.com/library/dn986596.aspx) operator to specify the attribute to target rather than specifying a string as you did with the bold tag helper:
+>Use the [nameof](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/nameof) operator to specify the attribute to target rather than specifying a string as you did with the bold tag helper:
 >
 >[!code-csharp[Main](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/zConditionTagHelperCopy.cs?highlight=1,2,5&range=5-18)]
 >
->The [nameof](https://msdn.microsoft.com/library/dn986596.aspx) operator will protect the code should it ever be refactored (we might want to change the name to `RedCondition`).
+>The [nameof](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/nameof) operator will protect the code should it ever be refactored (we might want to change the name to `RedCondition`).
 
 ### Avoiding Tag Helper conflicts
 
@@ -287,7 +284,7 @@ Because these two helpers are closely related and you may refactor them in the f
     [!code-csharp[Main](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?range=7-19)]
 
     >[!NOTE]
-    >The `AutoLinkerHttpTagHelper` class targets `p` elements and uses [Regex](https://msdn.microsoft.com/library/system.text.regularexpressions.regex.aspx) to create the anchor.
+    >The `AutoLinkerHttpTagHelper` class targets `p` elements and uses [Regex](https://docs.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference) to create the anchor.
 
 2.  Add the following markup to the end of the *Views/Home/Contact.cshtml* file:
 

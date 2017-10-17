@@ -5,7 +5,7 @@ description: How to configure Windows Authentication in ASP.NET Core
 keywords: ASP.NET Core,
 ms.author: riande
 manager: wpickett
-ms.date: 7/5/2017
+ms.date: 07/05/2017
 ms.topic: article
 ms.assetid: cf119f21-1a2b-49a2-b052-548ccb66ee83
 ms.technology: aspnet
@@ -22,7 +22,7 @@ Windows authentication can be configured for ASP.NET Core apps hosted with IIS o
 
 Windows authentication relies on the operating system to authenticate users of ASP.NET Core apps. You can use Windows authentication when your server runs on a corporate network using Active Directory domain identities or other Windows accounts to identify users. Windows authentication is a secure form of authentication best suited to intranet environments where users, client applications, and web servers belong to the same Windows domain.
 
-[Learn more about Windows Authentication and installing it for IIS](https://www.iis.net/configreference/system.webserver/security/authentication/windowsauthentication).
+[Learn more about Windows Authentication and installing it for IIS](https://docs.microsoft.com/iis/configuration/system.webServer/security/authentication/windowsAuthentication/).
 
 ## Enabling Windows authentication in an ASP.NET Core application
 
@@ -49,7 +49,7 @@ The Visual Studio properties page, debug tab provides check boxes for Windows au
 
 You can also configure these properties in the `launchSettings.json` file:
 
-```javascript
+```json
 {
   "iisSettings": {
     "windowsAuthentication": true,
@@ -82,11 +82,11 @@ Disable Anonymous Authentication and enable Windows Authentication.
 
 ### Publish your project to the IIS site folder
 
-Using Visual Studio or the dotnet CLI, *publish* your app to the destination folder.
+Using Visual Studio or the .NET Core CLI, *publish* your app to the destination folder.
 
 ![Visual Studio Publish Dialog](windowsauth/_static/vs-publish-app.png)
 
-Learn more about [publishing to IIS](https://docs.microsoft.com/aspnet/core/publishing/iis).
+Learn more about [publishing to IIS](xref:publishing/iis).
 
 Launch the app to verify Windows authentication is working.
 
@@ -94,7 +94,7 @@ Launch the app to verify Windows authentication is working.
 
 Although Kestrel doesn't support Windows authentication, you can use [WebListener](xref:fundamentals/servers/weblistener) to support self-hosted scenarios on Windows. The following example configures the app's web host to use WebListener with Windows authentication:
 
-```
+```csharp
 public class Program
 {
     public static void Main(string[] args)
@@ -117,7 +117,7 @@ public class Program
 
 ## Working with Windows authentication
 
-If your app uses Windows authentication and anonymous access, you can use the ``[Authorize]`` and ``[AllowAnonymous]`` attributes. Apps that do not have anonymous enabled do not rquire ``[Authorize]``; the  app is treated as requiring authentication, anonymous requests are rejected. Note, if the IIS site is configured **not** to allow anonymous access, the ``[AllowAnonymous]`` attribute does **not** allow anonymous requests. The ``[AllowAnonymous]`` attribute overrides ``[Authorize]`` attribute usage within apps that allow anonymous access.
+If your app uses Windows authentication and anonymous access, you can use the ``[Authorize]`` and ``[AllowAnonymous]`` attributes. Apps that do not have anonymous enabled do not require ``[Authorize]``; the  app is treated as requiring authentication, anonymous requests are rejected. Note, if the IIS site is configured **not** to allow anonymous access, the ``[AllowAnonymous]`` attribute does **not** allow anonymous requests. The ``[AllowAnonymous]`` attribute overrides ``[Authorize]`` attribute usage within apps that allow anonymous access.
 
 ### Impersonation
 

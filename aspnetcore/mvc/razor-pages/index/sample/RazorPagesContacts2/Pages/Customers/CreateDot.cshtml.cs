@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesContacts.Data;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace RazorPagesContacts.Pages.Customers
 {
-      public class CreateDotModel : PageModel
+#region snippet_Temp
+    public class CreateDotModel : PageModel
     {
         private readonly AppDbContext _db;
 
@@ -15,8 +15,8 @@ namespace RazorPagesContacts.Pages.Customers
             _db = db;
         }
 
-        [TempData] public string Message { get; set; }
-
+        [TempData]
+        public string Message { get; set; }
 
         [BindProperty]
         public Customer Customer { get; set; }
@@ -30,8 +30,9 @@ namespace RazorPagesContacts.Pages.Customers
 
             _db.Customers.Add(Customer);
             await _db.SaveChangesAsync();
-            Message = "it worked";
+            Message = $"Customer {Customer.Name} added";
             return RedirectToPage("./Index");
         }
     }
+#endregion
 }

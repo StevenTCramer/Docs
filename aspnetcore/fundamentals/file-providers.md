@@ -1,7 +1,7 @@
 ---
 title: File Providers in ASP.NET Core
 author: ardalis
-description: 
+description: Learn how ASP.NET Core abstracts file system access through the use of File Providers.
 keywords: ASP.NET Core,
 ms.author: riande
 manager: wpickett
@@ -14,11 +14,11 @@ uid: fundamentals/file-providers
 ---
 # File Providers in ASP.NET Core
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 ASP.NET Core abstracts file system access through the use of File Providers.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/file-providers/sample)
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/file-providers/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample))
 
 ## File Provider abstractions
 
@@ -74,8 +74,6 @@ You can use [globbing patterns](#globbing-patterns) when specifying files to emb
 
 When creating an `EmbeddedFileProvider`, pass the assembly it will read to its constructor.
 
-<!-- literal_block {"ids": [], "names": [], "highlight_args": {}, "backrefs": [], "dupnames": [], "linenos": false, "classes": [], "xml:space": "preserve", "language": "c#"} -->
-
 ```csharp
 var embeddedProvider = new EmbeddedFileProvider(Assembly.GetEntryAssembly());
 ```
@@ -108,7 +106,7 @@ The `IFileProvider` `Watch` method provides a way to watch one or more files or 
 
 In this article's sample, a console application is configured to display a message whenever a text file is modified:
 
-[!code-csharp[Main](file-providers/sample/src/WatchConsole/Program.cs?highlight=11,12,24,26,27)]
+[!code-csharp[Main](file-providers/sample/src/WatchConsole/Program.cs?name=snippet1&highlight=1-2,16,19-20)]
 
 The result, after saving the file several times:
 

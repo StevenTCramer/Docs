@@ -5,7 +5,7 @@ author: rick-anderson
 description: ""
 ms.author: aspnetcontent
 manager: wpickett
-ms.date: 07/21/2014
+ms.date: 10/14/2017
 ms.topic: article
 ms.assetid: 8935bf14-ca6d-4a4e-9dbe-b96ce74cef49
 ms.technology: 
@@ -15,6 +15,8 @@ msc.type: content
 ---
 Microsoft Ajax Content Delivery Network
 ====================
+**Note: The Microsoft Ajax CDN is not intended for production scenarios.**
+
 ## Table of Contents
 
 **[ajax.microsoft.com renamed to ajax.aspnetcdn.com](#ajaxmicrosoftcom_renamed_to_ajaxaspnetcdncom_18)**  
@@ -586,7 +588,8 @@ The following releases of the jQuery UI library are hosted on this CDN. Click ea
 
 The following releases of the jQuery Validation library are hosted on this CDN. Click each link to see the actual list of files.
 
-- [jQuery Validate 1.16.0](jquery-validate/cdnjqueryvalidate1160.md "jQuery Validation 1.16.1")
+- [jQuery Validate 1.17.0](jquery-validate/cdnjqueryvalidate1170.md "jQuery Validation 1.17.0")
+- [jQuery Validate 1.16.0](jquery-validate/cdnjqueryvalidate1160.md "jQuery Validation 1.16.0")
 - [jQuery Validate 1.15.1](jquery-validate/cdnjqueryvalidate1151.md "jQuery Validation 1.15.1")
 - [jQuery Validate 1.15.0](jquery-validate/cdnjqueryvalidate1150.md "jQuery Validation 1.15.0")
 - [jQuery Validate 1.14.0](jquery-validate/cdnjqueryvalidate1140.md "jQuery Validation 1.14.0")
@@ -666,12 +669,12 @@ The following releases of the jQuery DataTables plugin are hosted on this CDN. C
 
 The following releases of [Modernizr](http://www.modernizr.com "Modernizr") are hosted on the CDN:
 
-- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js
-- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-1.7-development-only.js
-- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.6.2.js
-- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.1.js
-- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.2.js
 - http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js
+- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.2.js
+- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.7.1.js
+- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.6.2.js
+- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-1.7-development-only.js
+- http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js
 
 <a id="JSHint_Releases_on_the_CDN_10"></a>
 

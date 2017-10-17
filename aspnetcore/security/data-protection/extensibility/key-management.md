@@ -14,7 +14,7 @@ uid: security/data-protection/extensibility/key-management
 ---
 # Key management extensibility
 
-<a name=data-protection-extensibility-key-management></a>
+<a name="data-protection-extensibility-key-management"></a>
 
 >[!TIP]
 > Read the [key management](../implementation/key-management.md#data-protection-implementation-key-management) section before reading this section, as it explains some of the fundamental concepts behind these APIs.
@@ -32,13 +32,13 @@ The IKey interface is the basic representation of a key in cryptosystem. The ter
 
 * Key identifier (a GUID)
 
-# [ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-Additionally, IKey exposes a CreateEncryptorInstance method which can be used to create an [IAuthenticatedEncryptor](core-crypto.md#data-protection-extensibility-core-crypto-iauthenticatedencryptor) instance tied to this key.
-
 # [ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 Additionally, IKey exposes a CreateEncryptor method which can be used to create an [IAuthenticatedEncryptor](core-crypto.md#data-protection-extensibility-core-crypto-iauthenticatedencryptor) instance tied to this key.
+
+# [ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+Additionally, IKey exposes a CreateEncryptorInstance method which can be used to create an [IAuthenticatedEncryptor](core-crypto.md#data-protection-extensibility-core-crypto-iauthenticatedencryptor) instance tied to this key.
 
 ---
 
@@ -58,21 +58,13 @@ The IKeyManager interface represents an object responsible for general key stora
 >[!WARNING]
 > Writing an IKeyManager is a very advanced task, and the majority of developers should not attempt it. Instead, most developers should take advantage of the facilities offered by the [XmlKeyManager](xref:security/data-protection/extensibility/key-management#data-protection-extensibility-key-management-xmlkeymanager) class.
 
-<a name=data-protection-extensibility-key-management-xmlkeymanager></a>
+<a name="data-protection-extensibility-key-management-xmlkeymanager"></a>
 
 ## XmlKeyManager
 
-The XmlKeyManager type is the in-box concrete implementation of IKeyManager. It provides several useful facilities, including key escrow and encryption of keys at rest. Keys in this system are represented as XML elements (specifically, [XElement](https://msdn.microsoft.com/library/system.xml.linq.xelement(v=vs.110).aspx)).
+The XmlKeyManager type is the in-box concrete implementation of IKeyManager. It provides several useful facilities, including key escrow and encryption of keys at rest. Keys in this system are represented as XML elements (specifically, [XElement](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview).
 
 XmlKeyManager depends on several other components in the course of fulfilling its tasks:
-
-# [ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-* IXmlRepository, which controls where keys are persisted in storage.
-
-* IXmlEncryptor [optional], which allows encrypting keys at rest.
-
-* IKeyEscrowSink [optional], which provides key escrow services.
 
 # [ASP.NET Core 2.x](#tab/aspnetcore2x)
 
@@ -84,17 +76,17 @@ XmlKeyManager depends on several other components in the course of fulfilling it
 
 * IKeyEscrowSink [optional], which provides key escrow services.
 
+# [ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+* IXmlRepository, which controls where keys are persisted in storage.
+
+* IXmlEncryptor [optional], which allows encrypting keys at rest.
+
+* IKeyEscrowSink [optional], which provides key escrow services.
+
 ---
 
 Below are high-level diagrams which indicate how these components are wired together within XmlKeyManager.
-
-# [ASP.NET Core 1.x](#tab/aspnetcore1x)
-
-   ![Key Creation](key-management/_static/keycreation1.png)
-
-   *Key Creation / CreateNewKey*
-
-In the implementation of CreateNewKey, the IAuthenticatedEncryptorConfiguration component is used to create a unique IAuthenticatedEncryptorDescriptor, which is then serialized as XML. If a key escrow sink is present, the raw (unencrypted) XML is provided to the sink for long-term storage. The unencrypted XML is then run through an IXmlEncryptor (if required) to generate the encrypted XML document. This encrypted document is persisted to long-term storage via the IXmlRepository. (If no IXmlEncryptor is configured, the unencrypted document is persisted in the IXmlRepository.)
 
 # [ASP.NET Core 2.x](#tab/aspnetcore2x)
 
@@ -104,15 +96,23 @@ In the implementation of CreateNewKey, the IAuthenticatedEncryptorConfiguration 
 
 In the implementation of CreateNewKey, the AlgorithmConfiguration component is used to create a unique IAuthenticatedEncryptorDescriptor, which is then serialized as XML. If a key escrow sink is present, the raw (unencrypted) XML is provided to the sink for long-term storage. The unencrypted XML is then run through an IXmlEncryptor (if required) to generate the encrypted XML document. This encrypted document is persisted to long-term storage via the IXmlRepository. (If no IXmlEncryptor is configured, the unencrypted document is persisted in the IXmlRepository.)
 
----
-
 # [ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-   ![Key Retrieval](key-management/_static/keyretrieval1.png)
+   ![Key Creation](key-management/_static/keycreation1.png)
+
+   *Key Creation / CreateNewKey*
+
+In the implementation of CreateNewKey, the IAuthenticatedEncryptorConfiguration component is used to create a unique IAuthenticatedEncryptorDescriptor, which is then serialized as XML. If a key escrow sink is present, the raw (unencrypted) XML is provided to the sink for long-term storage. The unencrypted XML is then run through an IXmlEncryptor (if required) to generate the encrypted XML document. This encrypted document is persisted to long-term storage via the IXmlRepository. (If no IXmlEncryptor is configured, the unencrypted document is persisted in the IXmlRepository.)
+
+---
 
 # [ASP.NET Core 2.x](#tab/aspnetcore2x)
 
    ![Key Retrieval](key-management/_static/keyretrieval2.png)
+   
+# [ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+   ![Key Retrieval](key-management/_static/keyretrieval1.png)
 
 ---
 
@@ -134,7 +134,7 @@ Implementations of IXmlRepository don't need to parse the XML passing through th
 
 There are two built-in concrete types which implement IXmlRepository: FileSystemXmlRepository and RegistryXmlRepository. See the [key storage providers document](../implementation/key-storage-providers.md#data-protection-implementation-key-storage-providers) for more information. Registering a custom IXmlRepository would be the appropriate manner to use a different backing store, e.g., Azure Blob Storage. To change the default repository application-wide, register a custom singleton IXmlRepository in the service provider.
 
-<a name=data-protection-extensibility-key-management-ixmlencryptor></a>
+<a name="data-protection-extensibility-key-management-ixmlencryptor"></a>
 
 ## IXmlEncryptor
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace ContosoUniversity.Controllers
 
         public DepartmentsController(SchoolContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Departments
@@ -67,7 +67,7 @@ namespace ContosoUniversity.Controllers
             {
                 _context.Add(department);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorID);
             return View(department);
@@ -85,6 +85,7 @@ namespace ContosoUniversity.Controllers
                 .Include(i => i.Administrator)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.DepartmentID == id);
+
             if (department == null)
             {
                 return NotFound();
@@ -127,7 +128,7 @@ namespace ContosoUniversity.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
@@ -191,7 +192,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (concurrencyError.GetValueOrDefault())
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
                 return NotFound();
             }
@@ -209,7 +210,6 @@ namespace ContosoUniversity.Controllers
             return View(department);
         }
 
-        // POST: Departments/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Department department)
@@ -221,12 +221,12 @@ namespace ContosoUniversity.Controllers
                     _context.Departments.Remove(department);
                     await _context.SaveChangesAsync();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException /* ex */)
             {
                 //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Delete", new { concurrencyError = true, id = department.DepartmentID });
+                return RedirectToAction(nameof(Delete), new { concurrencyError = true, id = department.DepartmentID });
             }
         }
 

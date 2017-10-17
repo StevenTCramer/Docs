@@ -2,7 +2,7 @@
 title: ASP.NET Core MVC with EF Core - Advanced - 10 of 10
 author: tdykstra
 description: This tutorial introduces several topics that are useful to be aware of when you go beyond the basics of developing ASP.NET web applications that use Entity Framework Core.
-keywords: ASP.NET Core, Entity Framework Core, raw sql, examine sql, repository pattern, unit of work pattern, automatic change detection, existing database
+keywords: ASP.NET Core,Entity Framework Core,raw sql,examine sql,repository pattern,unit of work pattern,automatic change detection,existing database
 ms.author: tdykstra
 manager: wpickett
 ms.date: 03/15/2017
@@ -17,9 +17,9 @@ uid: data/ef-mvc/advanced
 
 By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-The Contoso University sample web application demonstrates how to create ASP.NET Core 1.0 MVC web applications using Entity Framework Core 1.0 and Visual Studio 2015. For information about the tutorial series, see [the first tutorial in the series](intro.md).
+The Contoso University sample web application demonstrates how to create ASP.NET Core MVC web applications using Entity Framework Core and Visual Studio. For information about the tutorial series, see [the first tutorial in the series](intro.md).
 
-In the previous tutorial you implemented table-per-hierarchy inheritance. This tutorial introduces several topics that are useful to be aware of when you go beyond the basics of developing ASP.NET web applications that use Entity Framework Core.
+In the previous tutorial, you implemented table-per-hierarchy inheritance. This tutorial introduces several topics that are useful to be aware of when you go beyond the basics of developing ASP.NET Core web applications that use Entity Framework Core.
 
 ## Raw SQL Queries
 
@@ -57,7 +57,7 @@ Add a using statement:
 
 [!code-csharp[Main](intro/samples/cu/Controllers/HomeController.cs?name=snippet_Usings2)]
 
-Run the About page. It displays the same data it did before.
+Run the app and go to the About page. It displays the same data it did before.
 
 ![About page](advanced/_static/about.png)
 
@@ -85,7 +85,7 @@ In *Views/Courses/UpdateCourseCredits.cshtml*, replace the template code with th
 
 [!code-html[Main](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
-Run the `UpdateCourseCredits` method by selecting the **Courses** tab, then adding "/UpdateCourseCredits" to the end of the URL in the browser's address bar (for example: `http://localhost:5813/Course/UpdateCourseCredits)`. Enter a number in the text box:
+Run the `UpdateCourseCredits` method by selecting the **Courses** tab, then adding "/UpdateCourseCredits" to the end of the URL in the browser's address bar (for example: `http://localhost:5813/Courses/UpdateCourseCredits`). Enter a number in the text box:
 
 ![Update Course Credits page](advanced/_static/update-credits.png)
 
@@ -105,25 +105,33 @@ Sometimes it's helpful to be able to see the actual SQL queries that are sent to
 
 Open *StudentsController.cs* and in the `Details` method set a breakpoint on the `if (student == null)` statement.
 
-Run the application in debug mode, and go to the Details page for a student.
+Run the app in debug mode, and go to the Details page for a student.
 
 Go to the **Output** window showing debug output, and you see the query:
 
 ```
-Microsoft.EntityFrameworkCore.Storage.IRelationalCommandBuilderFactory:Information: Executed DbCommand (225ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
-SELECT [e].[EnrollmentID], [e].[CourseID], [e].[Grade], [e].[StudentID], [c].[CourseID], [c].[Credits], [c].[DepartmentID], [c].[Title]
-FROM [Enrollment] AS [e]
+Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (56ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [s].[ID], [s].[Discriminator], [s].[FirstName], [s].[LastName], [s].[EnrollmentDate]
+FROM [Person] AS [s]
+WHERE ([s].[Discriminator] = N'Student') AND ([s].[ID] = @__id_0)
+ORDER BY [s].[ID]
+Microsoft.EntityFrameworkCore.Database.Command:Information: Executed DbCommand (122ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT [s.Enrollments].[EnrollmentID], [s.Enrollments].[CourseID], [s.Enrollments].[Grade], [s.Enrollments].[StudentID], [e.Course].[CourseID], [e.Course].[Credits], [e.Course].[DepartmentID], [e.Course].[Title]
+FROM [Enrollment] AS [s.Enrollments]
+INNER JOIN [Course] AS [e.Course] ON [s.Enrollments].[CourseID] = [e.Course].[CourseID]
 INNER JOIN (
-    SELECT DISTINCT TOP(2) [s].[ID]
-    FROM [Person] AS [s]
-    WHERE ([s].[Discriminator] = N'Student') AND ([s].[ID] = @__id_0)
-    ORDER BY [s].[ID]
-) AS [s0] ON [e].[StudentID] = [s0].[ID]
-INNER JOIN [Course] AS [c] ON [e].[CourseID] = [c].[CourseID]
-ORDER BY [s0].[ID]
+    SELECT TOP(1) [s0].[ID]
+    FROM [Person] AS [s0]
+    WHERE ([s0].[Discriminator] = N'Student') AND ([s0].[ID] = @__id_0)
+    ORDER BY [s0].[ID]
+) AS [t] ON [s.Enrollments].[StudentID] = [t].[ID]
+ORDER BY [t].[ID]
 ```
 
-You'll notice something here that might surprise you: the SQL selects up to 2 rows (`TOP(2)`). The `SingleOrDefaultAsync` method doesn't resolve to one row on the server. If the Where clause matches multiple rows, the method must return null, so EF only has to select a maximum of 2 rows, because if 3 or more match the Where clause, the result from the `SingleOrDefault` method is the same as if 2 rows match.
+You'll notice something here that might surprise you: the SQL selects up to 2 rows (`TOP(2)`) from the Person table. The `SingleOrDefaultAsync` method doesn't resolve to 1 row on the server. Here's why:
+
+* If the query would return multiple rows, the method returns null.
+* To determine whether the query would return multiple rows, EF has to check if it returns at least 2.
 
 Note that you don't have to use debug mode and stop at a breakpoint to get logging output in the **Output** window. It's just a convenient way to stop the logging at the point you want to look at the output. If you don't do that, logging continues and you have to scroll back to find the parts you're interested in.
 
@@ -159,7 +167,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## Entity Framework Core source code and development plans
 
-The source code for Entity Framework Core is available at [https://github.com/aspnet/EntityFramework](https://github.com/aspnet/EntityFramework). Besides source code, you can get nightly builds, issue tracking, feature specs, design meeting notes, [the roadmap for future development](https://github.com/aspnet/EntityFramework/wiki/Roadmap), and more. You can file bugs, and you can contribute your own enhancements to the EF source code.
+The source code for Entity Framework Core is available at [https://github.com/aspnet/EntityFrameworkCore](https://github.com/aspnet/EntityFrameworkCore). Besides source code, you can get nightly builds, issue tracking, feature specs, design meeting notes, [the roadmap for future development](https://github.com/aspnet/EntityFrameworkCore/wiki/Roadmap), and more. You can file bugs, and you can contribute your own enhancements to the EF source code.
 
 Although the source code is open, Entity Framework Core is fully supported as a Microsoft product. The Microsoft Entity Framework team keeps control over which contributions are accepted and tests all code changes to ensure the quality of each release.
 
@@ -167,7 +175,7 @@ Although the source code is open, Entity Framework Core is fully supported as a 
 
 To reverse engineer a data model including entity classes from an existing database, use the [scaffold-dbcontext](https://docs.microsoft.com/ef/core/miscellaneous/cli/powershell#scaffold-dbcontext) command. See the [getting-started tutorial](https://docs.microsoft.com/ef/core/get-started/aspnetcore/existing-db).
 
-<a id="dynamic-linq">
+<a id="dynamic-linq"></a>
 ## Use dynamic LINQ to simplify sort selection code
 
 The [third tutorial in this series](sort-filter-page.md) shows how to write LINQ code by hard-coding column names in a `switch` statement. With two columns to choose from, this works fine, but if you have many columns the code could get verbose. To solve that problem, you can use the `EF.Property` method to specify the name of the property as a string. To try out this approach, replace the `Index` method in the `StudentsController` with the following code.

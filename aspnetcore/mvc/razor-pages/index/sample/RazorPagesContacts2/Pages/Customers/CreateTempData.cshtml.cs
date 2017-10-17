@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesContacts.Data;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace RazorPagesContacts.Pages.Customers
 {
-      public class CreateTempDataModel : PageModel
+    public class CreateTempDataModel : PageModel
     {
         private readonly AppDbContext _db;
 

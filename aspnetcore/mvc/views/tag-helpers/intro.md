@@ -2,7 +2,7 @@
 title: Tag Helpers in ASP.NET Core
 author: rick-anderson
 description: Learn what tag helpers are and how to use them in ASP.NET Core.
-keywords: ASP.NET Core, tag helpers
+keywords: ASP.NET Core,tag helpers
 ms.author: riande
 manager: wpickett
 ms.date: 7/14/2017
@@ -51,7 +51,7 @@ The `asp-for` attribute is made available by the `For` property in the `LabelTag
 
 Tag Helpers scope is controlled by a combination of `@addTagHelper`, `@removeTagHelper`, and the "!" opt-out character.
 
-<a name=add-helper-label></a>
+<a name="add-helper-label"></a>
 
 ### `@addTagHelper` makes Tag Helpers available
 
@@ -67,9 +67,7 @@ To expose all of the Tag Helpers in this project (which creates an assembly name
 
 If your project contains an `EmailTagHelper` with the default namespace (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`), you can provide the fully qualified name (FQN) of the Tag Helper:
 
-<!-- literal_block {"ids": [], "linenos": false, "xml:space": "preserve", "language": "html", "highlight_args": {"hl_lines": [3]}} -->
-
-```html
+```cshtml
 @using AuthoringTagHelpers
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
@@ -84,7 +82,7 @@ To add a Tag Helper to a view using an FQN, you first add the FQN (`AuthoringTag
 
 As mentioned previously, adding the `@addTagHelper` directive to the *Views/_ViewImports.cshtml* file makes the Tag Helper available to all view files in the *Views* directory and sub-directories. You can use the `@addTagHelper` directive in specific view files if you want to opt-in to exposing the Tag Helper to only those views.
 
-<a name=remove-razor-directives-label></a>
+<a name="remove-razor-directives-label"></a>
 
 ### `@removeTagHelper` removes Tag Helpers
 
@@ -106,7 +104,7 @@ You can disable a Tag Helper at the element level with the Tag Helper opt-out ch
 
 You must apply the Tag Helper opt-out character to the opening and closing tag. (The Visual Studio editor automatically adds the opt-out character to the closing tag when you add one to the opening tag). After you add the opt-out character, the element and Tag Helper attributes are no longer displayed in a distinctive font.
 
-<a name=prefix-razor-directives-label></a>
+<a name="prefix-razor-directives-label"></a>
 
 ### Using `@tagHelperPrefix` to make Tag Helper usage explicit
 
@@ -122,9 +120,6 @@ In the code image below, the Tag Helper prefix is set to `th:`, so only those el
 The same hierarchy rules that apply to `@addTagHelper` also apply to `@tagHelperPrefix`.
 
 ## IntelliSense support for Tag Helpers
-
-> [!NOTE]
-> You must install the [Razor Language Service extension](https://aka.ms/razorlangsvc) for IntelliSense to work with Tag Helpers. See [ASP.NET Core Known Issues](https://github.com/aspnet/Tooling/blob/master/known-issues-vs2017.md#aspnet-core-known-issues) for more information. 
 
 When you create a new ASP.NET web app in Visual Studio, it adds the NuGet package "Microsoft.AspNetCore.Razor.Tools". This is the package that adds Tag Helper tooling.
 
@@ -154,7 +149,7 @@ As soon as a Tag Helper attribute is entered, the tag and attribute fonts change
 
 ![image](intro/_static/labelaspfor2.png)
 
-You can enter the Visual Studio *CompleteWord* shortcut (Ctrl +spacebar is the [default](https://msdn.microsoft.com/library/da5kh0wa.aspx)) inside the double quotes (""), and you are now in C#, just like you would be in a C# class. IntelliSense displays all the methods and properties on the page model. The methods and properties are available because the property type is `ModelExpression`. In the image below, I'm editing the `Register` view, so the `RegisterViewModel` is available.
+You can enter the Visual Studio *CompleteWord* shortcut (Ctrl +spacebar is the [default](https://docs.microsoft.com/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio) inside the double quotes (""), and you are now in C#, just like you would be in a C# class. IntelliSense displays all the methods and properties on the page model. The methods and properties are available because the property type is `ModelExpression`. In the image below, I'm editing the `Register` view, so the `RegisterViewModel` is available.
 
 ![image](intro/_static/intellemail.png)
 
@@ -172,7 +167,7 @@ Tag Helpers attach to HTML elements in Razor views, while [HTML Helpers](http://
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
 ```
 
-The at (`@`) symbol tells Razor this is the start of code. The next two parameters ("FirstName" and "First Name:") are strings, so [IntelliSense](https://msdn.microsoft.com/library/hcw1s69b.aspx) can't help. The last argument:
+The at (`@`) symbol tells Razor this is the start of code. The next two parameters ("FirstName" and "First Name:") are strings, so [IntelliSense](https://docs.microsoft.com/visualstudio/ide/using-intellisense) can't help. The last argument:
 
 ```html
 new {@class="caption"}
@@ -248,7 +243,7 @@ The Visual Studio editor helps you write **all** of the markup in the Tag Helper
 
 * Web Server controls use type converters to convert strings into objects. With Tag Helpers, you work natively in C#, so you don't need to do type conversion.
 
-* Web Server controls use [System.ComponentModel](https://msdn.microsoft.com/library/system.componentmodel%28v=vs.110%29.aspx) to implement the run-time and design-time behavior of components and controls. `System.ComponentModel` includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components. Contrast that to Tag Helpers, which typically derive from `TagHelper`, and the `TagHelper` base class exposes only two methods, `Process` and `ProcessAsync`.
+* Web Server controls use [System.ComponentModel](https://docs.microsoft.com/dotnet/api/system.componentmodel) to implement the run-time and design-time behavior of components and controls. `System.ComponentModel` includes the base classes and interfaces for implementing attributes and type converters, binding to data sources, and licensing components. Contrast that to Tag Helpers, which typically derive from `TagHelper`, and the `TagHelper` base class exposes only two methods, `Process` and `ProcessAsync`.
 
 ## Customizing the Tag Helper element font
 

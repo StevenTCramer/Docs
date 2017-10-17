@@ -10,6 +10,7 @@ ms.topic: article
 ms.assetid: a8fb7eb7-e0e5-4394-84f3-1f1dbe012345
 ms.technology: aspnet
 ms.prod: asp.net-core
+uid: security/index
 ---
 # Security
 
@@ -19,12 +20,12 @@ ms.prod: asp.net-core
     * [Configure Windows Authentication](authentication/windowsauth.md)
     *   [Account Confirmation and Password Recovery](authentication/accconfirm.md)
     *   [Two-factor authentication with SMS](authentication/2fa.md) 
-    *   [Using Cookie Middleware without ASP.NET Core Identity](authentication/cookie.md)
+    *   [Using Cookie Authentication without ASP.NET Core Identity](authentication/cookie.md)
     *   [Azure Active Directory](authentication/azure-active-directory/index.md)
-        *   [Integrating Azure AD Into an ASP.NET Core Web App](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore)
-        *   [Calling a ASP.NET Core Web API From a WPF Application Using Azure AD](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore)
+        *   [Integrating Azure AD Into an ASP.NET Core Web App](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/)
+        *   [Calling a ASP.NET Core Web API From a WPF Application Using Azure AD](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore/)
         *   [Calling a Web API in an ASP.NET Core Web Application Using Azure AD](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/)
-        *   [An ASP.NET Core web app with Azure AD B2C](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore-b2c/)
+        *   [An ASP.NET Core web app with Azure AD B2C](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapp/)
     *   [Securing ASP.NET Core apps with IdentityServer4](https://identityserver4.readthedocs.io)
 *   [Authorization](authorization/index.md)
     *   [Introduction](authorization/introduction.md)
@@ -73,7 +74,6 @@ ms.prod: asp.net-core
 *   [Safe storage of app secrets during development](app-secrets.md)
 *   [Azure Key Vault configuration provider](key-vault-configuration.md)
 *   [Enforcing SSL](enforcing-ssl.md)
-*   [Setting up HTTPS for development](https.md)
 *   [Anti-Request Forgery](anti-request-forgery.md)
 *   [Preventing Open Redirect Attacks](preventing-open-redirects.md)
 *   [Preventing Cross-Site Scripting](cross-site-scripting.md)

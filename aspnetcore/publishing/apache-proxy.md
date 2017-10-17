@@ -1,7 +1,7 @@
 ---
 title: Host ASP.NET Core on Linux with Apache
 description: Learn how to set up Apache as a reverse proxy server on CentOS to redirect HTTP traffic to an ASP.NET Core web application running on Kestrel.
-keywords: ASP.NET Core, Apache, CentOS, Reverse Proxy, Linux, mod_proxy, httpd, hosting
+keywords: ASP.NET Core,Apache,CentOS,Reverse Proxy,Linux,mod_proxy,httpd,hosting
 author: spboyer
 ms.author: spboyer
 manager: wpickett
@@ -14,7 +14,7 @@ uid: publishing/apache-proxy
 ---
 # Set up a hosting environment for ASP.NET Core on Linux with Apache, and deploy to it
 
-By [Shayne Boyer](https://www.github.com/spboyer)
+By [Shayne Boyer](https://github.com/spboyer)
 
 Apache is a very popular HTTP server and can be configured as a proxy to redirect HTTP traffic similar to nginx. In this guide, we will learn how to set up Apache on CentOS 7 and use it as a reverse proxy to welcome incoming connections and redirect them to the ASP.NET Core application running on Kestrel. For this purpose, we will use the *mod_proxy* extension and other related Apache modules.
 
@@ -131,7 +131,8 @@ An example service file for our application.
     WorkingDirectory=/var/aspnetcore/hellomvc
     ExecStart=/usr/local/bin/dotnet /var/aspnetcore/hellomvc/hellomvc.dll
     Restart=always
-    RestartSec=10                                          # Restart service after 10 seconds if dotnet service crashes
+    # Restart service after 10 seconds if dotnet service crashes
+    RestartSec=10
     SyslogIdentifier=dotnet-example
     User=apache
     Environment=ASPNETCORE_ENVIRONMENT=Production 
@@ -293,7 +294,7 @@ Edit the httpd.conf file.
     sudo nano /etc/httpd/conf/httpd.conf
 ```
 
-Add the the line `Header append X-FRAME-OPTIONS "SAMEORIGIN"` and save the file, then restart Apache.
+Add the line `Header append X-FRAME-OPTIONS "SAMEORIGIN"` and save the file, then restart Apache.
 
 #### MIME-type sniffing
 
@@ -305,7 +306,7 @@ Edit the httpd.conf file.
     sudo nano /etc/httpd/conf/httpd.conf
 ```
 
-Add the the line `Header set X-Content-Type-Options "nosniff"` and save the file, then restart Apache.
+Add the line `Header set X-Content-Type-Options "nosniff"` and save the file, then restart Apache.
 
 ### Load Balancing 
 

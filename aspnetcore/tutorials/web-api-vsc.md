@@ -1,15 +1,18 @@
 ---
 title: Create a Web API with ASP.NET Core and VS Code
-author: rick-anderson
 description: Build a web API on macOS, Linux, or Windows with ASP.NET Core MVC and Visual Studio Code
-keywords: ASP.NET Core, WebAPI, Web API, REST, Mac, Linux,HTTP, Service, HTTP Service, VS Code
+author: rick-anderson
 ms.author: riande
-manager: wpickett
-ms.date: 5/24/2017
+ms.date: 09/22/2017
 ms.topic: get-started-article
-ms.assetid: 830b4bf5-dd14-423e-9f59-764a6f13a8f6
-ms.technology: aspnet
 ms.prod: asp.net-core
+
+#ROBOTS:
+ms.technology: aspnet
+keywords: ASP.NET Core,WebAPI,Web API,REST,Mac,Linux,HTTP,Service,HTTP Service,VS Code
+#ms.devlang: 
+manager: wpickett
+ms.assetid: 830b4bf5-dd14-423e-9f59-764a6f13a8f6
 uid: tutorials/web-api-vsc
 ---
 
@@ -32,7 +35,7 @@ There are 3 versions of this tutorial:
 ## Set up your development environment
 
 Download and install:
-- [.NET Core](https://microsoft.com/net/core)
+- [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) or later.
 - [Visual Studio Code](https://code.visualstudio.com)
 - Visual Studio Code [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 
@@ -110,9 +113,9 @@ In VS Code, press F5 to launch the app. Navigate to  http://localhost:5000/api/t
 - [Integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
 - [Keyboard shortcuts](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference)
 
-  - [Mac keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832143)
-  - [Linux keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832144)
-  - [Windows keyboard shortcuts](https://go.microsoft.com/fwlink/?linkid=832145)
+  - [Mac keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+  - [Linux keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf)
+  - [Windows keyboard shortcuts](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
 
 [!INCLUDE[next steps](../includes/webApi/next.md)]
 

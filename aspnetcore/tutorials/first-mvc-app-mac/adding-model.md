@@ -1,21 +1,21 @@
 ---
-title: Adding a model to an ASP.NET MVC Core app
+title: Add a model to an ASP.NET Core MVC app
 author: rick-anderson
 description: Add a model to a simple ASP.NET Core app.
-keywords: ASP.NET Core, MVC, scaffold, scaffolding
+keywords: ASP.NET Core,MVC,scaffold,scaffolding
 ms.author: riande
-manager: wpickett
-ms.date: 03/30/2017
+manager: wpickett  
+ms.devlang: csharp 
+ms.date: 09/22/2017
 ms.topic: get-started-article
 ms.assetid: 8dc28498-eeee-1638-b903-b593059e9f39
 ms.technology: aspnet
-ms.prod: asp.net-core
+ms.prod: .net-core
 uid: tutorials/first-mvc-app-mac/adding-model
 ---
 
 [!INCLUDE[adding-model](../../includes/mvc-intro/adding-model1.md)]
 
-* In Solution Explorer, right-click the **MvcMovie** project, and then select **Add** > **New Folder**. Name the folder *Models*.
 * Right-click the *Models* folder, and then select **Add** > **New File**. 
 * In the **New File** dialog:
 
@@ -39,7 +39,7 @@ Build the project to verify you don't have any errors. You now have a **M**odel 
 
 - Add the following highlighted NuGet packages to the *MvcMovie.csproj* file:
              
-   [!code-csharp[Main](start-mvc/sample/MvcMovie.csproj?highlight=5,14-21)]
+  [!code-csharp[Main](../first-mvc-app-xplat/start-mvc/sample/MvcMovie/MvcMovie.csproj?highlight=7,10)]
 
 - Save the file.
 
@@ -81,7 +81,7 @@ The scaffolding engine creates the following:
 * A movies controller (*Controllers/MoviesController.cs*)
 * Razor view files for Create, Delete, Details, Edit and Index pages (*Views/Movies/\*.cshtml*)
 
-The automatic creation of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*. You'll soon have a fully functional web application that lets you manage a movie database.
+The automatic creation of [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*. You'll soon have a fully functional web application that lets you manage a movie database.
 
 ### Add the files to Visual Studio
 
@@ -96,55 +96,7 @@ The automatic creation of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_upd
   * Navigate to the *Views* folder, select *Views\Movies*, and then select **Open**.
   * In the **Select files to add from Movies** dialog, select **Include All**, and then **OK**.
 
-
-### Create the database
-
-You'll call the `EnsureCreated` method to cause EF Core to create the database if it doesn't exist. 
-
-This is a method you typically use only in a development environment. It creates a database to match your data model when you run the app for the first time. When you change your data model, you drop the database. The next time the app runs, EF Core creates a new database to match your new data model.
-
-This approach doesn't work well in production, because you have data you don't want to lose by dropping the database. EF Core includes a [Migrations](xref:data/ef-mvc/migrations) feature that lets you preserve data when you make data model changes, but you won't be using Migrations in this tutorial. You'll learn more about data model changes in the [Add a field](xref:tutorials/first-mvc-app-xplat/new-field) tutorial.
-<!-- todo - update link above with mac version -->
-
-
-Create a *Models\DBinitialize.cs* file and add the following code:
-
-<!-- todo - replace this with code import -->
-
-```c#
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-
-namespace MvcMovie.Models
-{
-    public static class DBinitialize
-    {
-        public static void EnsureCreated(IServiceProvider serviceProvider)
-        {
-            var context = new MvcMovieContext(
-                serviceProvider.GetRequiredService<DbContextOptions<MvcMovieContext>>());
-            context.Database.EnsureCreated();
-        }
-    }
-}
-```
-
-Call the `EnsureCreated` method from the `Configure` method in the *Startup.cs* file. Add the call to the end of the method:
-
-<!-- todo - replace this with code import -->
-
-```c#
-    app.UseMvc(routes =>
-    {
-        routes.MapRoute(
-            name: "default",
-            template: "{controller=Home}/{action=Index}/{id?}");
-    });
-
-    DBinitialize.EnsureCreated(app.ApplicationServices);
-}
-```
+[!INCLUDE[adding-model 2x](../../includes/mvc-intro/adding-model2xp.md)]
 
 [!INCLUDE[adding-model](../../includes/mvc-intro/adding-model3.md)]
 

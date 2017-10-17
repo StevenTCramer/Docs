@@ -2,7 +2,7 @@
 title: Building projects with Yeoman in ASP.NET Core
 author: spboyer
 description: This article walks through building an ASP.NET Core web application using the Yeoman generator on macOS.
-keywords: ASP.NET Core, Yeoman, Cross Platform, yo aspnet
+keywords: ASP.NET Core,Yeoman,Cross Platform,yo aspnet
 ms.author: spboyer
 manager: wpickett
 ms.date: 07/05/2017
@@ -20,7 +20,7 @@ uid: client-side/yeoman
 
 ### Prerequisites
 
-Node.js and npm are required for Yeoman. Download from [Node.js](https://nodejs.org/en/). The installer includes [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/). Bower is also required for installing UI frameworks like Bootstrap.
+Node.js and npm are required for Yeoman. Download from [Node.js](https://nodejs.org/). The installer includes [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/). Bower is also required for installing UI frameworks like Bootstrap.
 
 To install Yeoman and Bower, run the following command:
 
@@ -130,7 +130,7 @@ Open a web browser, and navigate to `http://localhost:5000`.
 
 ## Adding to your project with sub generators
 
-Using Yeoman [sub generators](https://www.github.com/omnisharp/generator-aspnet#sub-generators), you can add either a `nuget.config` or a `web.config` after the project is created. For example, execute the following command from the directory in which the file should be created:
+Using Yeoman [sub generators](https://github.com/omnisharp/generator-aspnet), you can add either a `nuget.config` or a `web.config` after the project is created. For example, execute the following command from the directory in which the file should be created:
 
 ```console
 yo aspnet:nugetconfig

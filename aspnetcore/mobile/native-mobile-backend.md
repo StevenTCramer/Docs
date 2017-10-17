@@ -14,7 +14,7 @@ uid: mobile/native-mobile-backend
 ---
 # Creating Backend Services for Native Mobile Applications
 
-By [Steve Smith](http://ardalis.com)
+By [Steve Smith](https://ardalis.com/)
 
 Mobile apps can easily communicate with ASP.NET Core backend services.
 
@@ -41,8 +41,6 @@ Tapping an item on the main list screen opens up an edit dialog where the item's
 ![Edit item dialog](native-mobile-backend/_static/todo-android-edit-item.png)
 
 This sample is configured by default to use backend services hosted at developer.xamarin.com, which allow read-only operations. To test it out yourself against the ASP.NET Core app created in the next section running on your computer, you'll need to update the app's `RestUrl` constant. Navigate to the `ToDoREST` project and open the *Constants.cs* file. Replace the `RestUrl` with a URL that includes your machine's IP address (not localhost or 127.0.0.1, since this address is used from the device emulator, not from your machine). Include the port number as well (5000). In order to test that your services work with a device, ensure you don't have an active firewall blocking access to this port.
-
-<!-- literal_block {"ids": [], "names": [], "highlight_args": {}, "backrefs": [], "dupnames": [], "linenos": false, "classes": [], "xml:space": "preserve", "language": "csharp"} -->
 
 ```csharp
 // URL of REST service (Xamarin ReadOnly Service)

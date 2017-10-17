@@ -2,7 +2,7 @@
 title: Custom formatters in ASP.NET Core MVC web APIs
 author: tdykstra
 description: Learn how to create and use custom formatters for web APIs in ASP.NET Core. 
-keywords: ASP.NET Core, web api, custom formatters
+keywords: ASP.NET Core,web api,custom formatters
 ms.author: tdykstra
 manager: wpickett
 ms.date: 02/08/2017
@@ -18,13 +18,13 @@ By [Tom Dykstra](https://github.com/tdykstra)
 
 ASP.NET Core MVC has built-in support for data exchange in web APIs by using JSON, XML, or plain text formats. This article shows how to add support for additional formats by creating custom formatters.
 
-[View or download sample from GitHub](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/custom-formatters/Sample).
+[View or download sample from GitHub](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/custom-formatters/sample).
 
 ## When to use custom formatters
 
 Use a custom formatter when you want the [content negotiation](xref:mvc/models/formatting) process to support a content type that isn't supported by the built-in formatters (JSON, XML, and plain text).
 
-For example, if some of the clients for your web API can handle the [Protobuf](https://github.com/google/protobuf) format, you might want to use Protobuf with those clients because it's more efficient.  Or you might want your web API to send contact names and addresses in [vCard](https://en.wikipedia.org/wiki/VCard) format, a commonly used format for exchanging contact data. The sample app provided with this article implements a simple vCard formatter.
+For example, if some of the clients for your web API can handle the [Protobuf](https://github.com/google/protobuf) format, you might want to use Protobuf with those clients because it's more efficient.  Or you might want your web API to send contact names and addresses in [vCard](https://wikipedia.org/wiki/VCard) format, a commonly used format for exchanging contact data. The sample app provided with this article implements a simple vCard formatter.
 
 ## Overview of how to use a custom formatter
 
@@ -91,9 +91,11 @@ To use a custom formatter, add an instance of the formatter class to the `InputF
 
 [!code-csharp[Main](custom-formatters/sample/Startup.cs?name=mvcoptions&highlight=3-4)]
 
+Formatters are evaluated in the order you insert them. The first one takes precedence. 
+
 ## Next steps
 
-See the [sample application](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/custom-formatters/Sample), which implements simple vCard input and output formatters.  The application reads and writes vCards that look like the following example:
+See the [sample application](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/custom-formatters/sample), which implements simple vCard input and output formatters.  The application reads and writes vCards that look like the following example:
 
 ```
 BEGIN:VCARD

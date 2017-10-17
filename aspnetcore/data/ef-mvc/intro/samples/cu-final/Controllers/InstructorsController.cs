@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using ContosoUniversity.Models.SchoolViewModels;
-
 
 namespace ContosoUniversity.Controllers
 {
@@ -55,7 +54,7 @@ namespace ContosoUniversity.Controllers
 
             return View(viewModel);
         }
-
+        
         // GET: Instructors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -100,7 +99,7 @@ namespace ContosoUniversity.Controllers
             {
                 _context.Add(instructor);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             PopulateAssignedCourseData(instructor);
             return View(instructor);
@@ -183,7 +182,7 @@ namespace ContosoUniversity.Controllers
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             UpdateInstructorCourses(selectedCourses, instructorToUpdate);
             PopulateAssignedCourseData(instructorToUpdate);
@@ -257,7 +256,7 @@ namespace ContosoUniversity.Controllers
             _context.Instructors.Remove(instructor);
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private bool InstructorExists(int id)

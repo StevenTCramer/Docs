@@ -2,7 +2,7 @@
 title: Host in a Windows Service
 author: tdykstra
 description: Learn how to host an ASP.NET Core application in a Windows Service.
-keywords: ASP.NET Core, Windows service, hosting
+keywords: ASP.NET Core,Windows service,hosting
 ms.author: tdykstra
 manager: wpickett
 ms.date: 03/30/2017
@@ -17,13 +17,13 @@ uid: hosting/windows-service
 
 By [Tom Dykstra](https://github.com/tdykstra)
 
-The recommended way to host an ASP.NET Core app on Windows when you don't use IIS is to run it in a [Windows Service](https://msdn.microsoft.com/library/d56de412). That way it can automatically start after reboots and crashes, without waiting for someone to log in.
+The recommended way to host an ASP.NET Core app on Windows when you don't use IIS is to run it in a [Windows Service](https://docs.microsoft.com/dotnet/framework/windows-services/introduction-to-windows-service-applications). That way it can automatically start after reboots and crashes, without waiting for someone to log in.
 
-[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/hosting/windows-service/sample) See the [Next Steps](#next-steps) section for instructions on how to run it.
+[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/hosting/windows-service/sample) ([how to download](xref:tutorials/index#how-to-download-a-sample)). See the [Next Steps](#next-steps) section for instructions on how to run it.
 
 ## Prerequisites
 
-* The app must run on the .NET framework runtime.  In the *.csproj* file, specify appropriate values for [TargetFramework](https://docs.microsoft.com/nuget/schema/target-frameworks) and [RuntimeIdentifier](https://docs.microsoft.com/dotnet/articles/core/rid-catalog). Here's an example:
+* The app must run on the .NET Framework runtime.  In the *.csproj* file, specify appropriate values for [TargetFramework](https://docs.microsoft.com/nuget/schema/target-frameworks) and [RuntimeIdentifier](https://docs.microsoft.com/dotnet/articles/core/rid-catalog). Here's an example:
 
   [!code-xml[](windows-service/sample/AspNetCoreService.csproj?range=3-6)]
 
@@ -117,5 +117,5 @@ If the app doesn't start up as expected when running in a service, a quick way t
 
 This article was written with the help of sources that were already published. The earliest and most useful of them were these:
 
-* [Hosting ASP.NET Core as Windows service](http://stackoverflow.com/questions/37346383/hosting-asp-net-core-as-windows-service/37464074#37464074)
-* [How to host your ASP.NET Core in a Windows Service](http://dotnetthoughts.net/how-to-host-your-aspnet-core-in-a-windows-service/)
+* [Hosting ASP.NET Core as Windows service](https://stackoverflow.com/questions/37346383/hosting-asp-net-core-as-windows-service/37464074)
+* [How to host your ASP.NET Core in a Windows Service](https://dotnetthoughts.net/how-to-host-your-aspnet-core-in-a-windows-service/)

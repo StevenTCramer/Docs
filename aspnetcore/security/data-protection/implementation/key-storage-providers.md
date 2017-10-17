@@ -2,10 +2,10 @@
 title: Key storage providers
 author: rick-anderson
 description:  Key storage providers
-keywords: encryption, ASP.NET Core,
+keywords: encryption,ASP.NET Core
 ms.author: riande
 manager: wpickett
-ms.date: 1/14/2017
+ms.date: 01/14/2017
 ms.topic: article
 ms.assetid: 423e0a79-2f34-44c4-aaf3-146a53c39251
 ms.technology: aspnet
@@ -14,7 +14,7 @@ uid: security/data-protection/implementation/key-storage-providers
 ---
 # Key storage providers
 
-<a name=data-protection-implementation-key-storage-providers></a>
+<a name="data-protection-implementation-key-storage-providers"></a>
 
 By default the data protection system [employs a heuristic](../configuration/default-settings.md#data-protection-default-settings) to determine where cryptographic key material should be persisted. The developer can override the heuristic and manually specify the location.
 
@@ -67,7 +67,7 @@ public void ConfigureServices(IServiceCollection services)
 
 See the following for more information:
 
-- [StackExchange.Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)
+- [StackExchange.Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
 - [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
 - [Redis test code](https://github.com/aspnet/DataProtection/blob/rel/1.1.0/samples/Redis/Program.cs).
 

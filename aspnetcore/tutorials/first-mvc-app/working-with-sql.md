@@ -2,7 +2,7 @@
 title: Working with SQL Server LocalDB
 author: rick-anderson
 description: Using SQL Server LocalDB with a simple MVC app
-keywords: ASP.NET Core,SQL Server LocalDB, SQL Server, LocalDB 
+keywords: ASP.NET Core,SQL Server LocalDB,SQL Server,LocalDB
 ms.author: riande
 manager: wpickett
 ms.date: 03/07/2017
@@ -63,9 +63,22 @@ if (context.Movie.Any())
 }
 ```
 
-Add the seed initializer to the end of the `Configure` method in the *Startup.cs* file:
+<a name="si"></a>
+### Add the seed initializer
+
+# [ASP.NET Core 2.x](#tab/aspnetcore2x)
+
+Add the seed initializer to the `Main` method in the *Program.cs* file:
+
+[!code-csharp[Main](start-mvc/sample/MvcMovie/Program.cs?highlight=6,14-32)]
+
+# [ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+Add the seed initializer to the end of the `Configure` method in the *Startup.cs* file.
 
 [!code-csharp[Main](start-mvc/sample/MvcMovie/Startup.cs?highlight=9&name=snippet_seed)]
+
+---
 
 Test the app
 
